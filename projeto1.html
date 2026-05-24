@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto 1 – Site Energias Renováveis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        .project-header { margin-top: 3rem; margin-bottom: 0.4rem; }
+        .project-meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
+        .code-wrapper {
+            max-width: 700px;
+            margin: 0 auto 1rem;
+            padding: 0 24px;
+        }
+        .code-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1e2029;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            padding: 0.6rem 1rem;
+        }
+        .code-toolbar span { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-body); }
+        .copy-btn {
+            font-size: 0.78rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.2rem 0.7rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+        pre {
+            margin: 0 !important;
+            border-radius: 0 0 10px 10px !important;
+            border: 1px solid var(--border);
+            font-size: 0.875rem !important;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        pre code.hljs { border-radius: 0 0 10px 10px; }
+    </style>
+</head>
+<body>
+    <h1 class="project-header">Site sobre Energias Renováveis</h1>
+    <p class="project-meta">Projeto 1 · HTML &amp; CSS · Disciplina de AI</p>
+    <p>Eu e um colega de turma fizemos um site para a disciplina de AI sobre energias renováveis e os tipos de resíduos.</p>
+
+    <div class="code-wrapper">
+        <div class="code-toolbar">
+            <span>projeto1.html</span>
+            <button class="copy-btn" onclick="copyCode()">Copiar</button>
+        </div>
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-PT&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Rumo ao Equilíbrio Ambiental&lt;/title&gt;
+&lt;style&gt;
+:root{
+    --verde:#2d6a4f;
+    --verde-escuro:#1b4332;
+    --verde-claro:#b7e4c7;
+    --fundo:#f1f5f4;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, Helvetica, sans-serif;}
+body{background:var(--fundo);color:#333;line-height:1.7;}
+header{background:linear-gradient(90deg,var(--verde-escuro),var(--verde));color:white;}
+.topo{max-width:1100px;margin:auto;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.topo h1{text-align:center;flex-grow:1;font-size:28px;color:white;}
+.topo input{padding:7px 10px;font-size:16px;border-radius:5px;border:none;outline:none;width:200px;}
+.hamburguer{font-size:30px;cursor:pointer;}
+nav{display:none;background:var(--verde);}
+nav ul{list-style:none;}
+nav span, nav a{display:block;padding:14px 20px;color:white;cursor:pointer;text-decoration:none;}
+nav span:hover, nav a:hover{background:var(--verde-claro);color:#000;}
+nav ul ul{display:none;background:#40916c;}
+main{max-width:1100px;margin:auto;padding:25px;}
+section{display:none;background:white;padding:30px;margin-bottom:30px;border-radius:10px;box-shadow:0 6px 15px rgba(0,0,0,0.08);animation:fade 0.4s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+section h2{color:var(--verde-escuro);border-left:6px solid var(--verde);padding-left:10px;margin-bottom:15px;}
+section img{width:100%;max-height:none;object-fit:contain;border-radius:8px;margin:15px 0;}
+.caixa{background:#edf6f9;border-left:5px solid var(--verde);padding:15px;margin:15px 0;}
+.noticias{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.1);transition: transform 0.3s ease;cursor:pointer;}
+.card:hover{transform:translateY(-5px);}
+.card img{height:auto;width:100%;object-fit:cover;}
+.card div{padding:15px;}
+.lista{margin:15px 0;padding-left:20px;}
+.lista li{margin:8px 0;}
+footer{background:var(--verde-escuro);color:white;text-align:center;padding:20px;}
+#home{display:block;}
+&lt;/style&gt;
+&lt;script&gt;
+function toggleMenu(){
+    const menu=document.getElementById(&quot;menu&quot;);
+    menu.style.display = menu.style.display===&quot;block&quot; ? &quot;none&quot; : &quot;block&quot;;
+}
+function mostrar(id){
+    document.querySelectorAll(&quot;section&quot;).forEach(sec=&gt;sec.style.display=&quot;none&quot;);
+    document.getElementById(id).style.display=&quot;block&quot;;
+    window.scrollTo(0,0);
+}
+document.addEventListener(&quot;DOMContentLoaded&quot;,()=&gt;{
+    document.querySelectorAll(&quot;nav span&quot;).forEach(item=&gt;{
+        item.addEventListener(&quot;click&quot;,()=&gt;{
+            const sub=item.nextElementSibling;
+            if(sub){sub.style.display = sub.style.display===&quot;block&quot; ? &quot;none&quot; : &quot;block&quot;;}
+        });
+    });
+});
+function pesquisar(){
+    const query = document.getElementById(&quot;search&quot;).value.toLowerCase();
+    document.querySelectorAll(&quot;section&quot;).forEach(sec=&gt;{
+        const text = sec.innerText.toLowerCase();
+        if(text.includes(query)){
+            sec.style.display=&quot;block&quot;;
+        } else {sec.style.display=&quot;none&quot;;}
+    });
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+&lt;div class=&quot;topo&quot;&gt;
+    &lt;input type=&quot;text&quot; id=&quot;search&quot; placeholder=&quot;Pesquisar...&quot; onkeyup=&quot;pesquisar()&quot; /&gt;
+    &lt;h1&gt;Rumo ao Equilíbrio Ambiental&lt;/h1&gt;
+    &lt;div class=&quot;hamburguer&quot; onclick=&quot;toggleMenu()&quot;&gt;☰&lt;/div&gt;
+&lt;/div&gt;
+&lt;nav id=&quot;menu&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;home&#x27;)&quot;&gt;Início&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;span&gt;Desenvolvimento Sustentável ▼&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;ds&#x27;)&quot;&gt;Definição&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;pilares&#x27;)&quot;&gt;Três Pilares&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;historia-ds&#x27;)&quot;&gt;História&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;span&gt;Tratamento de Resíduos ▼&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;residuos&#x27;)&quot;&gt;Definição&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;tipos-residuos&#x27;)&quot;&gt;Tipos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;historia-residuos&#x27;)&quot;&gt;História&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;span&gt;Energias Renováveis ▼&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;energias&#x27;)&quot;&gt;Introdução + Tipos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;eolica&#x27;)&quot;&gt;Energia Eólica&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;solar&#x27;)&quot;&gt;Energia Solar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;hidrica&#x27;)&quot;&gt;Energia Hídrica&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;oceanica&#x27;)&quot;&gt;Energia Oceânica&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;geotermica&#x27;)&quot;&gt;Energia Geotérmica&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a onclick=&quot;mostrar(&#x27;biocombustiveis&#x27;)&quot;&gt;Biocombustíveis&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+&lt;section id=&quot;home&quot;&gt;
+&lt;h2&gt;Bem-vindo!&lt;/h2&gt;
+&lt;p&gt;Rumo ao Equilíbrio Ambiental simboliza a necessidade urgente de adotar um modelo de desenvolvimento sustentável que promova o equilíbrio entre o progresso económico, o bem-estar social e a preservação do meio ambiente, incentivando práticas responsáveis no uso dos recursos naturais, a correta gestão, redução e tratamento dos resíduos sólidos e industriais, bem como a reciclagem e a reutilização de materiais, ao mesmo tempo que reforça a importância da transição para energias renováveis, como a solar, eólica e hídrica, como alternativas limpas e eficientes aos combustíveis fósseis, contribuindo para a redução da poluição, o combate às alterações climáticas, a proteção da biodiversidade e a construção de um futuro mais justo, saudável e sustentável para as gerações presentes e futuras.&lt;/p&gt;
+&lt;h2&gt;Notícias Recentes&lt;/h2&gt;
+&lt;div class=&quot;noticias&quot;&gt;
+&lt;div class=&quot;card&quot;&gt;
+&lt;img src=&quot;imagens/noticia1.jpg&quot;&gt;
+&lt;div&gt;&lt;p&gt;Projetos de desenvolvimento sustentável demoram tempo, mas todos podem fazer a sua parte.&lt;/p&gt;
+&lt;a href=&quot;https://agencia.ecclesia.pt/portal/desenvolvimento-projetos-de-ods-demoram-tempo-na-sua-implementacao-mas-todos-podem-fazer-a-sua-parte/&quot; target=&quot;_blank&quot;&gt;Leia mais&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;card&quot;&gt;
+&lt;img src=&quot;imagens/noticia2.webp&quot;&gt;
+&lt;div&gt;&lt;p&gt;Reflexão sobre recolha e tratamento de resíduos.&lt;/p&gt;
+&lt;a href=&quot;https://www.noticiasaominuto.com/pais/2896414/amp-vai-fazer-profunda-reflexao-sobre-recolha-e-tratamento-de-residuos&quot; target=&quot;_blank&quot;&gt;Leia mais&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;card&quot;&gt;
+&lt;img src=&quot;imagens/noticia3.webp&quot;&gt;
+&lt;div&gt;&lt;p&gt;Consumo de energia bate recorde com renováveis no valor mais elevado de sempre.&lt;/p&gt;
+&lt;a href=&quot;https://www.jornaldenegocios.pt/empresas/energia/detalhe/consumo-de-energia-bate-recorde-com-renovaveis-no-valor-mais-elevado-de-sempre&quot; target=&quot;_blank&quot;&gt;Leia mais&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Dicas Rápidas &amp; Curiosidades&lt;/h2&gt;
+&lt;div class=&quot;caixa&quot;&gt;&lt;p&gt;Separe o lixo em casa: plástico, papel e orgânicos. Pequenas ações fazem grande diferença.&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;&lt;p&gt;Reduza consumo de energia: use lâmpadas LED e aproveite luz natural.&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;&lt;p&gt;Curiosidade: A energia solar que chega à Terra em 1 hora poderia suprir toda a demanda global por 1 ano.&lt;/p&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;section id=&quot;ds&quot;&gt;
+&lt;h2&gt;Desenvolvimento Sustentável&lt;/h2&gt;
+&lt;p&gt;É o conceito que procura atender as necessidades do presente sem comprometer as gerações futuras.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;pilares&quot;&gt;
+&lt;h2&gt;Três Pilares&lt;/h2&gt;
+&lt;div class=&quot;caixa&quot;&gt;&lt;strong&gt;Ambiental:&lt;/strong&gt; Focado na proteção dos ecossistemas, na gestão dos recursos naturais e na preservação da biodiversidade para as gerações futuras.&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;&lt;strong&gt;Social:&lt;/strong&gt; Prioriza melhorar a qualidade de vida com igualdade, acesso à educação, saúde, segurança e alimento para todos.&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;&lt;strong&gt;Econômica:&lt;/strong&gt; Promover o crescimento econômico responsável, eficiente na utilização e que não cause danos ao meio ambiente e à sociedade.&lt;/div&gt;
+&lt;/section&gt;
+&lt;section id=&quot;historia-ds&quot;&gt;
+&lt;h2&gt;História do Desenvolvimento Sustentável&lt;/h2&gt;
+&lt;p&gt;O conceito surgiu na década de 1980, sendo consolidado com o relatório &quot;Nosso Futuro Comum&quot;, publicado pela Comissão Mundial sobre Meio Ambiente e Desenvolvimento, em 1987.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;residuos&quot;&gt;
+&lt;h2&gt;Tratamento de Resíduos&lt;/h2&gt;
+&lt;p&gt;É o conjunto de ações aplicadas aos resíduos para diminuir os seus impactos negativos no meio ambiente,na saúde,promovendo a reciclagem e a recuperação de recurso incluindo processos como o separação,a reciclagem,a compostagem e a incineração.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;tipos-residuos&quot;&gt;
+&lt;h2&gt;Tipos de Resíduos&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Resíduos Urbanos:&lt;/strong&gt; São materiais descartados no quotidiano, incluindo &quot;lixo&quot; doméstico e resíduos de comércio, podendo ser tratados com a reciclagem e com a compostagem.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resíduos Industriais:&lt;/strong&gt; Gerados por atividades industrial são todos os materiais(sólidos , líquidos ou gasosos) gerados com a resultado do acesso de produção ,transformação ,utilização ou manutenção de atividades industriais, podendo ser tratados com a reciclagem e a incineração.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resíduos Orgânicos:&lt;/strong&gt; São todos os materiais de origem animal e vegetal que são biodegradáveis ou seja, que decompõem naturalmente com a ajuda de micro-organismos. Podendo ser tratados com a compostagem e incineração.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;historia-residuos&quot;&gt;
+&lt;h2&gt;História do Tratamento de Resíduos&lt;/h2&gt;
+&lt;p&gt;O tratamento de resíduos começou a ser mais sistematizado após a Revolução Industrial, quando o aumento da produção começou a gerar grandes quantidades de resíduos.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;energias&quot;&gt;
+&lt;h2&gt;Energias Renováveis&lt;/h2&gt;
+&lt;p&gt;São aquelas que têm origem em fontes que se renovam naturalmente e nunca se esgotam, tais como vento (eólica), sol (solar), água (hídrica), oceanos (oceânica), calor da Terra (geotérmica) e biomassa (biocombustíveis).&lt;/p&gt;
+&lt;ul&gt;
+&lt;p&gt;&lt;strong&gt;Tipos de Energias Renováveis:&lt;/strong&gt;
+&lt;li&gt;Energia eólica&lt;/li&gt;
+&lt;li&gt;Energia solar&lt;/li&gt;
+&lt;li&gt;Energia hídrica&lt;/li&gt;
+&lt;li&gt;Energia oceânica&lt;/li&gt;
+&lt;li&gt;Energia geotérmica&lt;/li&gt;
+&lt;li&gt;Biocombustíveis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;eolica&quot;&gt;
+&lt;h2&gt;Energia Eólica&lt;/h2&gt;
+&lt;img src=&quot;imagens/foto15.jpg&quot; alt=&quot;Parque eólico com turbinas&quot;&gt;
+&lt;p&gt;A energia eólica é gerada a partir da força e do movimento do vento, que é captado e convertido em eletricidade por meio das pás de turbinas eólicas. Essas turbinas ativam geradores que produzem eletricidade.&lt;/p&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Vantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Fonte de energia renovável e limpa;&lt;/li&gt;
+&lt;li&gt;Redução da dependência de combustíveis fósseis não renováveis;&lt;/li&gt;
+&lt;li&gt;Baixo impacto ambiental;&lt;/li&gt;
+&lt;li&gt;Fácil Instalação e custo de operação e manutenção baixos;&lt;/li&gt;
+&lt;li&gt;Fonte privilegiada para a produção de hidrogénio verde através de eletrólise.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Desvantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Intermitência dos recursos ao longo do dia e necessidade de solução de armazenamento;&lt;/li&gt;
+&lt;li&gt;Variabilidade de produção de energia, o que pode tornar a produção de energia instável e imprevisível;&lt;/li&gt;
+&lt;li&gt;Impacto visual e sonoro (ruído, impacto em aves e outras espécies);&lt;/li&gt;
+&lt;li&gt;Custo elevado da tecnologia offshore.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;section id=&quot;solar&quot;&gt;
+&lt;h2&gt;Energia Solar&lt;/h2&gt;
+&lt;img src=&quot;imagens/foto19.jpg&quot; alt=&quot;Painéis solares&quot;&gt;
+&lt;p&gt;A energia solar é uma energia renovável obtida a partir da luz do sol. Existem duas grandes formas de captar esta energia: as que recorrem a técnicas ativas e as passivas.&lt;/p&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Vantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Flexibilidade de instalação podendo ser utilizada em áreas remotas;&lt;/li&gt;
+&lt;li&gt;Reduz a dependência de combustíveis fósseis e a emissão de gases poluentes;&lt;/li&gt;
+&lt;li&gt;Fonte de energia inesgotável e 100% limpa;&lt;/li&gt;
+&lt;li&gt;Baixos custos de manutenção;&lt;/li&gt;
+&lt;li&gt;Fonte privilegiada para a produção de hidrogénio verde através de eletrólise.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Desvantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Dependência de condições climáticas para obter a máxima eficiência;&lt;/li&gt;
+&lt;li&gt;Necessidade de investimento para a instalação a nível doméstico;&lt;/li&gt;
+&lt;li&gt;Necessidade de armazenamento para utilização em momentos de ausência de luz solar;&lt;/li&gt;
+&lt;li&gt;Necessidade de espaço para a instalação de painéis solares;&lt;/li&gt;
+&lt;li&gt;Desafios de reciclagem dos painéis solares no final da vida útil.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;section id=&quot;hidrica&quot;&gt;
+&lt;h2&gt;Energia Hídrica&lt;/h2&gt;
+&lt;img src=&quot;imagens/foto20.jpg&quot; alt=&quot;Barragem&quot;&gt;
+&lt;p&gt;A energia hídrica também conhecida como hidroelétrica, é gerada a partir da intensidade de um fluxo de água através das variações topográficas do terreno.&lt;/p&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Vantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Fonte de energia renovável;&lt;/li&gt;
+&lt;li&gt;Baixa emissão de GEE;&lt;/li&gt;
+&lt;li&gt;Baixos custos de produção;&lt;/li&gt;
+&lt;li&gt;Estabilidade no fornecimento de energia;&lt;/li&gt;
+&lt;li&gt;Possibilidade de armazenar energia para os períodos de seca;&lt;/li&gt;
+&lt;li&gt;Facilitar a integração de outras energias renováveis.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Desvantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Impacto ambiental local;&lt;/li&gt;
+&lt;li&gt;Elevado custo de construção;&lt;/li&gt;
+&lt;li&gt;Dependência de precipitação;&lt;/li&gt;
+&lt;li&gt;Alteração de ecossistemas e biodiversidade.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;section id=&quot;oceanica&quot;&gt;
+&lt;h2&gt;Energia Oceânica&lt;/h2&gt;
+&lt;img src=&quot;imagens/foto16.jpg&quot; alt=&quot;Energia das ondas&quot;&gt;
+&lt;p&gt;É produzida a partir da força das ondas e das marés. A tecnologia para explorar este recurso ainda está em fase de desenvolvimento.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;geotermica&quot;&gt;
+&lt;h2&gt;Energia Geotérmica&lt;/h2&gt;
+&lt;img src=&quot;imagens/foto17.webp&quot; alt=&quot;Energia geotérmica&quot;&gt;
+&lt;p&gt;É a energia obtida a partir do calor proveniente do interior da Terra. As zonas geográficas com atividade vulcânica são as que apresentam maior potencial para explorar este tipo de energia.&lt;/p&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Vantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Energia renovável e sustentável;&lt;/li&gt;
+&lt;li&gt;Baixas emissões de carbono;&lt;/li&gt;
+&lt;li&gt;Contribui para a redução de custos de eletricidade.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Desvantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Disponibilidade limitada em função da localização geográfica;&lt;/li&gt;
+&lt;li&gt;Elevado custo inicial de instalação;&lt;/li&gt;
+&lt;li&gt;Presença do característico odor a enxofre.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;section id=&quot;biocombustiveis&quot;&gt;
+&lt;h2&gt;Biocombustíveis&lt;/h2&gt;
+&lt;img src=&quot;imagens/foto18.webp&quot; alt=&quot;Biocombustíveis&quot;&gt;
+&lt;p&gt;São combustíveis líquidos ou gasosos produzidos a partir de biomassa, isto é, de matéria orgânica de origem vegetal ou animal.&lt;/p&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Vantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Redução da emissão de GEE;&lt;/li&gt;
+&lt;li&gt;Fonte de energia renovável;&lt;/li&gt;
+&lt;li&gt;Menor dependência de combustíveis fósseis;&lt;/li&gt;
+&lt;li&gt;Estímulo à produção agrícola e criação de empregos no sector rural.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;caixa&quot;&gt;
+&lt;strong&gt;Desvantagens:&lt;/strong&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+&lt;li&gt;Risco de desflorestação e ameaça à biodiversidade;&lt;/li&gt;
+&lt;li&gt;Poluição resultante de culturas intensivas;&lt;/li&gt;
+&lt;li&gt;Consumo de água elevado;&lt;/li&gt;
+&lt;li&gt;Necessidade de investimentos em tecnologia e infraestrutura.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;/main&gt;
+&lt;footer&gt;
+&lt;p&gt;Trabalho De Área de Integração – Educação Ambiental&lt;/p&gt;
+&lt;/footer&gt;
+&lt;/body&gt;&lt;/html&gt;</code></pre>
+    </div>
+
+    <a href="index.html">← Voltar atrás</a>
+
+    <script>
+        hljs.highlightAll();
+        function copyCode() {
+            const code = document.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copiado!';
+                setTimeout(() => btn.textContent = 'Copiar', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

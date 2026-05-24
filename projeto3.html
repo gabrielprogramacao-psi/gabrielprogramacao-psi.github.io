@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto 3 – Cultura do Egito</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        .project-header { margin-top: 3rem; margin-bottom: 0.4rem; }
+        .project-meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
+        .code-wrapper {
+            max-width: 700px;
+            margin: 0 auto 1rem;
+            padding: 0 24px;
+        }
+        /* Abas */
+        .tabs {
+            max-width: 700px;
+            margin: 2rem auto 0;
+            padding: 0 24px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .tab-btn {
+            font-size: 0.8rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            background: #1e2029;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            color: var(--text-muted);
+            padding: 0.45rem 1.1rem;
+            border-radius: 7px 7px 0 0;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+        }
+        .tab-btn.active {
+            background: #282c34;
+            color: var(--text);
+            border-color: var(--accent);
+            border-bottom: 1px solid #282c34;
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        /* Barra de topo do bloco */
+        .code-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1e2029;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: 0 6px 0 0;
+            padding: 0.6rem 1rem;
+        }
+        .code-toolbar span { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-body); }
+        .copy-btn {
+            font-size: 0.78rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.2rem 0.7rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+        pre {
+            margin: 0 !important;
+            border-radius: 0 0 10px 10px !important;
+            border: 1px solid var(--border);
+            font-size: 0.875rem !important;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        pre code.hljs { border-radius: 0 0 10px 10px; }
+    </style>
+</head>
+<body>
+    <h1 class="project-header">Trabalho sobre a Cultura do Egito</h1>
+    <p class="project-meta">Projeto 3 · HTML, CSS &amp; JavaScript · Trabalho de Cultura</p>
+    <p>Fiz um site sobre a cultura e costumes do Egito, explorando desde os faraós e deuses até ao Egito moderno.</p>
+
+    <!-- Abas de ficheiros -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('html', this)">index.html</button>
+        <button class="tab-btn" onclick="switchTab('css', this)">style.css</button>
+        <button class="tab-btn" onclick="switchTab('js', this)">script.js</button>
+    </div>
+
+    <div class="code-wrapper">
+
+        <!-- HTML -->
+        <div id="panel-html" class="tab-panel active">
+            <div class="code-toolbar">
+                <span>index.html</span>
+                <button class="copy-btn" onclick="copyCode('panel-html')">Copiar</button>
+            </div>
+            <pre><code class="language-html" id="code-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-PT&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;Uma viagem imersiva pela cultura egípcia — da civilização faraónica ao Egito moderno.&quot;/&gt;
+  &lt;title&gt;Egito: O Berço das Civilizações&lt;/title&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Cairo:wght@300;400;600&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+  &lt;style&gt;
+    .gallery-img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover .gallery-img { transform: scale(1.06); }
+    .gallery-info { transform: none !important; }
+
+    #pharaohs {
+      background: var(--black); position: relative; overflow: hidden;
+    }
+    #pharaohs::before {
+      content: &#x27;&#x27;; position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+    }
+    .pharaohs-intro { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+    .pharaohs-intro .section-desc { max-width: 100%; text-align: center; }
+    .pharaohs-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+    }
+    .pharaoh-card {
+      position: relative;
+      border: 1px solid rgba(212,175,55,0.15);
+      background: rgba(212,175,55,0.03);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .pharaoh-card:hover { border-color: rgba(212,175,55,0.4); transform: translateY(-4px); }
+    .pharaoh-img {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover; object-position: top;
+      display: block;
+      filter: sepia(20%) contrast(1.05);
+      transition: filter 0.4s;
+    }
+    .pharaoh-card:hover .pharaoh-img { filter: sepia(0%) contrast(1.1); }
+    .pharaoh-info { padding: 1.4rem; border-top: 1px solid rgba(212,175,55,0.1); }
+    .pharaoh-reign {
+      font-family: &#x27;Cinzel&#x27;, serif; font-size: 0.6rem;
+      letter-spacing: 3px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .pharaoh-name {
+      font-family: &#x27;Cinzel&#x27;, serif; font-size: 1.05rem;
+      font-weight: 700; color: var(--white); margin-bottom: 0.5rem;
+    }
+    .pharaoh-desc {
+      font-family: &#x27;Cormorant Garamond&#x27;, serif; font-size: 0.95rem;
+      color: var(--sand-dark); line-height: 1.7;
+    }
+
+    #gods { background: var(--ink); position: relative; overflow: hidden; }
+    #gods::before {
+      content: &#x27;&#x27;; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .gods-intro { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+    .gods-intro .section-desc { max-width: 100%; text-align: center; }
+    .gods-scroll-row {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.2rem;
+    }
+    .god-tile {
+      text-align: center; padding: 1.2rem 0.8rem;
+      border: 1px solid rgba(212,175,55,0.1);
+      background: rgba(0,0,0,0.2);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .god-tile::before {
+      content: &#x27;&#x27;; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      transform: scaleX(0); transition: transform 0.4s;
+    }
+    .god-tile:hover { border-color: rgba(212,175,55,0.35); background: rgba(212,175,55,0.04); }
+    .god-tile:hover::before { transform: scaleX(1); }
+    .god-img {
+      width: 100%; aspect-ratio: 2/3;
+      object-fit: cover; object-position: top;
+      border-radius: 1px; margin-bottom: 0.8rem;
+      filter: sepia(15%) contrast(1.05);
+    }
+    .god-hieroglyph { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; color: var(--gold); opacity: 0.8; }
+    .god-name { font-family: &#x27;Cinzel&#x27;, serif; font-size: 0.82rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; letter-spacing: 2px; }
+    .god-domain { font-family: &#x27;Cormorant Garamond&#x27;, serif; font-style: italic; font-size: 0.85rem; color: var(--gold-dark); margin-bottom: 0.5rem; }
+    .god-desc { font-family: &#x27;Cormorant Garamond&#x27;, serif; font-size: 0.88rem; color: var(--sand-dark); line-height: 1.6; }
+
+    .img-caption {
+      font-family: &#x27;Cinzel&#x27;, serif; font-size: 0.6rem;
+      letter-spacing: 2px; color: var(--gold);
+      text-transform: uppercase;
+    }
+    .img-caption-wrap {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    }
+
+    @media (max-width: 1024px) {
+      .pharaohs-grid { grid-template-columns: repeat(2, 1fr); }
+      .gods-scroll-row { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .pharaohs-grid { grid-template-columns: repeat(2, 1fr); }
+      .gods-scroll-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .pharaohs-grid { grid-template-columns: 1fr; }
+      .gods-scroll-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;nav id=&quot;navbar&quot;&gt;
+  &lt;a href=&quot;#hero&quot; class=&quot;nav-logo&quot;&gt;𓂀 &lt;span&gt;KEMET&lt;/span&gt;&lt;/a&gt;
+  &lt;ul class=&quot;nav-links&quot; id=&quot;navLinks&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;#geography&quot; onclick=&quot;closeMenu()&quot;&gt;Geografia&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#ancient&quot;   onclick=&quot;closeMenu()&quot;&gt;Cultura Antiga&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#pharaohs&quot;  onclick=&quot;closeMenu()&quot;&gt;Faraós&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#gods&quot;      onclick=&quot;closeMenu()&quot;&gt;Deuses&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#coptic&quot;    onclick=&quot;closeMenu()&quot;&gt;Tradição Cristã&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#modern&quot;    onclick=&quot;closeMenu()&quot;&gt;Egito Moderno&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class=&quot;nav-burger&quot; id=&quot;burger&quot; aria-label=&quot;Abrir menu de navegação&quot;&gt;
+    &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/nav&gt;
+
+&lt;!-- HERO --&gt;
+&lt;section id=&quot;hero&quot;&gt;
+  &lt;div class=&quot;hero-bg&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;hero-particles&quot; id=&quot;particles&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;hero-hieroglyphs&quot; aria-hidden=&quot;true&quot;&gt;𓀀 𓁐 𓂀 𓃂 𓄿 𓅓 𓆓 𓇋 𓈖 𓉐&lt;/div&gt;
+  &lt;div style=&quot;position:relative; z-index:2; max-width:900px;&quot;&gt;
+    &lt;p class=&quot;hero-eyebrow&quot;&gt;𓂀 &amp;nbsp; Uma Viagem Através do Tempo &amp;nbsp; 𓂀&lt;/p&gt;
+    &lt;h1 class=&quot;hero-title&quot;&gt;Egito: &lt;span class=&quot;accent&quot;&gt;O Berço das&lt;br&gt;Civilizações&lt;/span&gt;&lt;/h1&gt;
+    &lt;p class=&quot;hero-subtitle&quot;&gt;Da margem sagrada do Nilo às ruas vibrantes do Cairo moderno — uma civilização que moldou o mundo há mais de cinco mil anos.&lt;/p&gt;
+    &lt;a href=&quot;#geography&quot; class=&quot;hero-cta&quot;&gt;
+      Explorar a Civilização
+      &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M5 12h14M12 5l7 7-7 7&quot;/&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;hero-scroll&quot; aria-hidden=&quot;true&quot;&gt;&lt;span&gt;Rolar&lt;/span&gt;&lt;div class=&quot;scroll-line&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- SECÇÃO 1 — GEOGRAFIA --&gt;
+&lt;section id=&quot;geography&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;geo-grid&quot;&gt;
+      &lt;div class=&quot;reveal&quot;&gt;
+        &lt;p class=&quot;section-eyebrow&quot;&gt;Secção I&lt;/p&gt;
+        &lt;h2 class=&quot;section-title&quot;&gt;O Dom&lt;br&gt;&lt;span&gt;do Nilo&lt;/span&gt;&lt;/h2&gt;
+        &lt;div class=&quot;ornament&quot;&gt;𓆓 𓏤 𓆓&lt;/div&gt;
+        &lt;p class=&quot;section-desc&quot;&gt;O Egito é uma das maiores ironias geográficas da história: um deserto vasto e implacável que gerou uma das mais ricas civilizações do mundo. A chave deste paradoxo é o Rio Nilo — a espinha dorsal de uma nação, a fonte de toda a vida.&lt;/p&gt;
+        &lt;p class=&quot;section-desc&quot; style=&quot;margin-top:1.5rem;&quot;&gt;A cheia anual do Nilo depositava nas margens um limo negro e fértil chamado &lt;em&gt;&quot;Kemet&quot;&lt;/em&gt; (a terra negra), contrastando com o &lt;em&gt;&quot;Deshret&quot;&lt;/em&gt; (a terra vermelha), o deserto infértil. Este isolamento natural protegeu a civilização egípcia por milénios, permitindo-lhe florescer sem interrupção durante 3&amp;nbsp;000 anos.&lt;/p&gt;
+        &lt;p class=&quot;section-desc&quot; style=&quot;margin-top:1.5rem;&quot;&gt;Geograficamente, o Egito faz fronteira com a Líbia a oeste, o Sudão a sul, Israel e o Mar Vermelho a este. O Delta do Nilo, a norte, é uma das regiões agrícolas mais férteis do mundo e lar de Alexandria, cidade fundada por Alexandre o Grande em 331 a.C.&lt;/p&gt;
+        &lt;div class=&quot;geo-stats&quot; style=&quot;margin-top:2.5rem;&quot;&gt;
+          &lt;div class=&quot;geo-stat reveal&quot;&gt;&lt;div class=&quot;geo-stat-num&quot;&gt;6 650&lt;small style=&quot;font-size:1rem&quot;&gt;km&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;geo-stat-label&quot;&gt;Comprimento do Nilo&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;geo-stat reveal&quot;&gt;&lt;div class=&quot;geo-stat-num&quot;&gt;3 000&lt;small style=&quot;font-size:1rem&quot;&gt;+&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;geo-stat-label&quot;&gt;Anos de Civilização&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;geo-stat reveal&quot;&gt;&lt;div class=&quot;geo-stat-num&quot;&gt;2 560&lt;/div&gt;&lt;div class=&quot;geo-stat-label&quot;&gt;a.C. — Grande Pirâmide&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;geo-stat reveal&quot;&gt;&lt;div class=&quot;geo-stat-num&quot;&gt;138&lt;/div&gt;&lt;div class=&quot;geo-stat-label&quot;&gt;Pirâmides Identificadas&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;geo-stat reveal&quot; style=&quot;grid-column:span 2;&quot;&gt;&lt;div class=&quot;geo-stat-num&quot;&gt;105 &lt;small style=&quot;font-size:1rem&quot;&gt;milhões&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;geo-stat-label&quot;&gt;Habitantes — 2024&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p class=&quot;section-desc&quot; style=&quot;margin-top:1.8rem; font-size:1rem;&quot;&gt;&lt;em style=&quot;color:var(--gold);&quot;&gt;Facto curioso:&lt;/em&gt; apenas 5% do território egípcio é habitado — uma faixa estreita ao longo do Nilo e o Delta. O restante é o vasto Deserto do Saara e o Deserto Arábico.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;reveal&quot; style=&quot;transition-delay:0.2s&quot;&gt;
+        &lt;div class=&quot;geo-map-wrapper&quot;&gt;
+          &lt;div class=&quot;map-corner-br&quot;&gt;&lt;/div&gt;
+          &lt;iframe
+            src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3582060.9789543!2d30.5!3d26.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt!2spt!4v1714000000000!5m2!1spt!2spt&quot;
+            allowfullscreen=&quot;&quot; loading=&quot;lazy&quot; referrerpolicy=&quot;no-referrer-when-downgrade&quot;
+            title=&quot;Mapa do Egito — Rio Nilo e Pirâmides de Gizé&quot;&gt;
+          &lt;/iframe&gt;
+        &lt;/div&gt;
+        &lt;p style=&quot;font-family:&#x27;Cinzel&#x27;,serif; font-size:0.6rem; letter-spacing:3px; color:var(--gold-dark); text-align:center; margin-top:0.8rem; text-transform:uppercase;&quot;&gt;𓆓 &amp;nbsp; O Egito — Nordeste de África &amp;nbsp; 𓆓&lt;/p&gt;
+
+        &lt;!-- Vista aérea do Nilo — Wikimedia Commons, domínio público --&gt;
+        &lt;div style=&quot;margin-top:2rem; position:relative; overflow:hidden; border:1px solid rgba(212,175,55,0.2);&quot;&gt;
+          &lt;img
+            src=&quot;https://revistapesquisa.fapesp.br/wp-content/uploads/2019/12/008-011_Notas_287-1-1140.jpg&quot;
+            alt=&quot;O Rio Nilo visto do espaço, mostrando o contraste entre a faixa verde fértil e o deserto castanho&quot;
+            style=&quot;width:100%; height:220px; object-fit:cover; display:block; object-position:center; filter:sepia(15%) contrast(1.08);&quot;
+            loading=&quot;lazy&quot;
+          /&gt;
+          &lt;div class=&quot;img-caption-wrap&quot;&gt;&lt;p class=&quot;img-caption&quot;&gt;O Nilo visto do espaço — a linha da vida no deserto&lt;/p&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- SECÇÃO 2 — CULTURA ANTIGA --&gt;
+&lt;section id=&quot;ancient&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;ancient-intro reveal&quot; style=&quot;text-align:center; max-width:700px; margin:0 auto 5rem;&quot;&gt;
+      &lt;p class=&quot;section-eyebrow&quot; style=&quot;justify-content:center;&quot;&gt;Secção II&lt;/p&gt;
+      &lt;h2 class=&quot;section-title&quot;&gt;Cultura &lt;span&gt;Faraónica&lt;/span&gt;&lt;/h2&gt;
+      &lt;div class=&quot;ornament&quot;&gt;𓀀 𓅓 𓇋 𓏤&lt;/div&gt;
+      &lt;p class=&quot;section-desc&quot; style=&quot;margin:0 auto; text-align:center;&quot;&gt;A civilização do Antigo Egito, conhecida pelos seus habitantes como &lt;em&gt;Kemet&lt;/em&gt;, produziu realizações intelectuais, artísticas e arquitetónicas que ainda assombram o mundo moderno.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;cards-grid&quot;&gt;
+
+      &lt;!-- Cartão 1: Religião &amp; Mumificação — pintura de Anúbis a mumificar, Wikimedia --&gt;
+      &lt;div class=&quot;card reveal&quot;&gt;
+        &lt;div class=&quot;card-bg&quot; style=&quot;background-image:url(&#x27;https://upload.wikimedia.org/wikipedia/commons/d/d3/Sarcofago_aberto.jpg&#x27;);&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-overlay&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-content&quot;&gt;
+          &lt;span class=&quot;card-icon&quot;&gt;𓀬&lt;/span&gt;
+          &lt;p class=&quot;card-label&quot;&gt;Crença &amp;amp; Ritual&lt;/p&gt;
+          &lt;div class=&quot;card-line&quot;&gt;&lt;/div&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Religião &amp;amp;&lt;br&gt;Mumificação&lt;/h3&gt;
+          &lt;p class=&quot;card-desc&quot;&gt;Os egípcios acreditavam na vida após a morte com a mesma certeza com que acreditavam no amanhecer. O processo de mumificação — que durava 70 dias — preservava o corpo físico para que a alma &lt;em&gt;Ka&lt;/em&gt; pudesse regressar. O Livro dos Mortos guiava os defuntos pelo Duat ao julgamento de Osíris.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Cartão 2: Pirâmides — foto Wikimedia Commons --&gt;
+      &lt;div class=&quot;card reveal&quot; style=&quot;transition-delay:0.15s&quot;&gt;
+        &lt;div class=&quot;card-bg&quot; style=&quot;background-image:url(&#x27;https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/1280px-Kheops-Pyramid.jpg&#x27;);&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-overlay&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-content&quot;&gt;
+          &lt;span class=&quot;card-icon&quot;&gt;𓉐&lt;/span&gt;
+          &lt;p class=&quot;card-label&quot;&gt;Engenharia &amp;amp; Poder&lt;/p&gt;
+          &lt;div class=&quot;card-line&quot;&gt;&lt;/div&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Arquitetura&lt;br&gt;Monumental&lt;/h3&gt;
+          &lt;p class=&quot;card-desc&quot;&gt;As Pirâmides de Gizé são a única das Sete Maravilhas do Mundo Antigo ainda de pé. A Grande Pirâmide de Quéops, com 146 m de altura e 2,3 milhões de blocos, foi a estrutura mais alta do mundo durante 3&amp;nbsp;800 anos. Os templos de Karnak e Abu Simbel manifestam a teologia egípcia em pedra imortal.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Cartão 3: Hieróglifos — parede de hieróglifos reais, Wikimedia --&gt;
+      &lt;div class=&quot;card reveal&quot; style=&quot;transition-delay:0.3s&quot;&gt;
+        &lt;div class=&quot;card-bg&quot; style=&quot;background-image:url(&#x27;https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Papyrus_Ani_curs_hiero.jpg/250px-Papyrus_Ani_curs_hiero.jpg?utm_source=www.wikidata.org&amp;utm_campaign=index&amp;utm_content=thumbnail&#x27;);&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-overlay&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-content&quot;&gt;
+          &lt;span class=&quot;card-icon&quot;&gt;𓏤&lt;/span&gt;
+          &lt;p class=&quot;card-label&quot;&gt;Linguagem &amp;amp; Conhecimento&lt;/p&gt;
+          &lt;div class=&quot;card-line&quot;&gt;&lt;/div&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Escrita&lt;br&gt;Hieroglífica&lt;/h3&gt;
+          &lt;p class=&quot;card-desc&quot;&gt;Com mais de 700 signos distintos, os hieróglifos eram uma escrita sagrada reservada aos sacerdotes e escribas. Desenvolvida por volta de 3200 a.C., perdurou durante 3&amp;nbsp;500 anos. A Pedra de Roseta (196 a.C.) permitiu a Champollion decifrar este código em 1822.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+    &lt;!-- Segunda linha de cartões --&gt;
+    &lt;div class=&quot;cards-grid&quot; style=&quot;margin-top:1.5rem;&quot;&gt;
+
+      &lt;!-- Cartão 4: Medicina — Papiro de Ebers, Wikimedia --&gt;
+      &lt;div class=&quot;card reveal&quot; style=&quot;height:340px;&quot;&gt;
+        &lt;div class=&quot;card-bg&quot; style=&quot;background-image:url(&#x27;https://upload.wikimedia.org/wikipedia/commons/8/8b/Ebers7766.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail_unscaled&#x27;); background-position:center top;&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-overlay&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-content&quot;&gt;
+          &lt;span class=&quot;card-icon&quot;&gt;𓋹&lt;/span&gt;
+          &lt;p class=&quot;card-label&quot;&gt;Ciência &amp;amp; Cura&lt;/p&gt;
+          &lt;div class=&quot;card-line&quot;&gt;&lt;/div&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Medicina&lt;br&gt;Egípcia&lt;/h3&gt;
+          &lt;p class=&quot;card-desc&quot;&gt;O Papiro Edwin Smith (c. 1600 a.C.) é o mais antigo tratado cirúrgico do mundo. Os médicos egípcios tratavam feridas com mel antissético e tinham noções avançadas de anatomia. Imhotep, arquiteto do faraó Djoser, foi o primeiro cientista da história identificado pelo nome.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Cartão 5: Arte funerária — pintura tumba de Nefertari, Wikimedia --&gt;
+      &lt;div class=&quot;card reveal&quot; style=&quot;height:340px; transition-delay:0.15s;&quot;&gt;
+        &lt;div class=&quot;card-bg&quot; style=&quot;background-image:url(&#x27;https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Tomb_of_Nefertari%2C_painting.jpg/800px-Tomb_of_Nefertari%2C_painting.jpg&#x27;);&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-overlay&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-content&quot;&gt;
+          &lt;span class=&quot;card-icon&quot;&gt;𓅓&lt;/span&gt;
+          &lt;p class=&quot;card-label&quot;&gt;Expressão &amp;amp; Beleza&lt;/p&gt;
+          &lt;div class=&quot;card-line&quot;&gt;&lt;/div&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Arte &amp;amp;&lt;br&gt;Pintura Funerária&lt;/h3&gt;
+          &lt;p class=&quot;card-desc&quot;&gt;A arte egípcia seguia cânones rígidos: figuras vistas simultaneamente de frente e de lado, cores simbólicas (verde para a vida, negro para a fertilidade). As pinturas nas tumbas não eram decoração — eram programas mágicos que garantiam a vida eterna.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Cartão 6: Esfinge — foto Wikimedia --&gt;
+      &lt;div class=&quot;card reveal&quot; style=&quot;height:340px; transition-delay:0.3s;&quot;&gt;
+        &lt;div class=&quot;card-bg&quot; style=&quot;background-image:url(&#x27;https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/The_Great_Sphinx_of_Giza.jpg/1280px-The_Great_Sphinx_of_Giza.jpg&#x27;);&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-overlay&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-content&quot;&gt;
+          &lt;span class=&quot;card-icon&quot;&gt;𓇋&lt;/span&gt;
+          &lt;p class=&quot;card-label&quot;&gt;Mistério &amp;amp; Poder&lt;/p&gt;
+          &lt;div class=&quot;card-line&quot;&gt;&lt;/div&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;A Grande&lt;br&gt;Esfinge de Gizé&lt;/h3&gt;
+          &lt;p class=&quot;card-desc&quot;&gt;Com 73 metros de comprimento e 20 de altura, a Esfinge é a maior escultura monolítica da Antiguidade. Esculpida num afloramento calcário, guarda o platô de Gizé há mais de 4&amp;nbsp;500 anos. O seu rosto, apesar dos danos, representa provavelmente o faraó Quéfren.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- SECÇÃO 3 — FARAÓS NOTÁVEIS --&gt;
+&lt;section id=&quot;pharaohs&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;pharaohs-intro reveal&quot;&gt;
+      &lt;p class=&quot;section-eyebrow&quot; style=&quot;justify-content:center;&quot;&gt;Secção III&lt;/p&gt;
+      &lt;h2 class=&quot;section-title&quot;&gt;Os &lt;span&gt;Grandes Faraós&lt;/span&gt;&lt;/h2&gt;
+      &lt;div class=&quot;ornament&quot;&gt;𓁐 𓀀 𓁐&lt;/div&gt;
+      &lt;p class=&quot;section-desc&quot;&gt;Durante três milénios, os faraós governaram o Egito como deuses vivos — encarnações de Hórus em vida e de Osíris na morte. Eis os que marcaram a história da humanidade.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;pharaohs-grid&quot;&gt;
+
+      &lt;!-- Ramsés II — estátua colossal de Abu Simbel, Wikimedia --&gt;
+      &lt;div class=&quot;pharaoh-card reveal&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ramesses_II_as_child.jpg/800px-Ramesses_II_as_child.jpg&quot;
+          alt=&quot;Estátua de Ramsés II no Museu Egípcio&quot;
+          class=&quot;pharaoh-img&quot; loading=&quot;lazy&quot;
+        /&gt;
+        &lt;div class=&quot;pharaoh-info&quot;&gt;
+          &lt;div class=&quot;pharaoh-reign&quot;&gt;1279–1213 a.C. · 19.ª Dinastia&lt;/div&gt;
+          &lt;div class=&quot;pharaoh-name&quot;&gt;Ramsés II — O Grande&lt;/div&gt;
+          &lt;p class=&quot;pharaoh-desc&quot;&gt;Governou durante 66 anos — um dos reinados mais longos da história. Construiu Abu Simbel e negociou o primeiro tratado de paz da história com os hititas. Teve mais de 100 filhos.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Tutancâmon — máscara funerária, Wikimedia --&gt;
+      &lt;div class=&quot;pharaoh-card reveal&quot; style=&quot;transition-delay:0.1s;&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Tutanchamun_Maske.jpg/800px-Tutanchamun_Maske.jpg&quot;
+          alt=&quot;Máscara funerária dourada de Tutancâmon, Museu do Cairo&quot;
+          class=&quot;pharaoh-img&quot; loading=&quot;lazy&quot;
+        /&gt;
+        &lt;div class=&quot;pharaoh-info&quot;&gt;
+          &lt;div class=&quot;pharaoh-reign&quot;&gt;1332–1323 a.C. · 18.ª Dinastia&lt;/div&gt;
+          &lt;div class=&quot;pharaoh-name&quot;&gt;Tutancâmon&lt;/div&gt;
+          &lt;p class=&quot;pharaoh-desc&quot;&gt;O &quot;Rei-Criança&quot; subiu ao trono aos 9 anos e morreu aos 18. A descoberta intacta da sua tumba em 1922 por Howard Carter revolucionou a arqueologia e fascina o mundo até hoje.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Hatshepsut — estátua do MET, Wikimedia --&gt;
+      &lt;div class=&quot;pharaoh-card reveal&quot; style=&quot;transition-delay:0.2s;&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Hatshepsut_Metropolitan.jpg/800px-Hatshepsut_Metropolitan.jpg&quot;
+          alt=&quot;Estátua da faraó Hatshepsut no Metropolitan Museum of Art&quot;
+          class=&quot;pharaoh-img&quot; loading=&quot;lazy&quot;
+        /&gt;
+        &lt;div class=&quot;pharaoh-info&quot;&gt;
+          &lt;div class=&quot;pharaoh-reign&quot;&gt;1478–1458 a.C. · 18.ª Dinastia&lt;/div&gt;
+          &lt;div class=&quot;pharaoh-name&quot;&gt;Hatshepsut&lt;/div&gt;
+          &lt;p class=&quot;pharaoh-desc&quot;&gt;Uma das mais bem-sucedidas faraós egípcias. Travestida com barba postiça, governou durante 20 anos e construiu o magnífico templo de Deir el-Bahari em Luxor.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Cleópatra — baixo-relevo de Dendera, Wikimedia --&gt;
+      &lt;div class=&quot;pharaoh-card reveal&quot; style=&quot;transition-delay:0.3s;&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kleopatra-VII.-Altes-Museum-Berlin1.jpg/800px-Kleopatra-VII.-Altes-Museum-Berlin1.jpg&quot;
+          alt=&quot;Baixo-relevo de Cleópatra VII no templo de Dendera&quot;
+          class=&quot;pharaoh-img&quot; loading=&quot;lazy&quot;
+        /&gt;
+        &lt;div class=&quot;pharaoh-info&quot;&gt;
+          &lt;div class=&quot;pharaoh-reign&quot;&gt;51–30 a.C. · Dinastia Ptolemaica&lt;/div&gt;
+          &lt;div class=&quot;pharaoh-name&quot;&gt;Cleópatra VII&lt;/div&gt;
+          &lt;p class=&quot;pharaoh-desc&quot;&gt;A última rainha ativa do Egito faraónico. Poliglota, falava nove línguas. Aliou-se a Júlio César e Marco António na tentativa de preservar a independência do Egito face a Roma.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- SECÇÃO 4 — OS DEUSES DO EGITO --&gt;
+&lt;section id=&quot;gods&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;gods-intro reveal&quot;&gt;
+      &lt;p class=&quot;section-eyebrow&quot; style=&quot;justify-content:center;&quot;&gt;Secção IV&lt;/p&gt;
+      &lt;h2 class=&quot;section-title&quot;&gt;O &lt;span&gt;Panteão Egípcio&lt;/span&gt;&lt;/h2&gt;
+      &lt;div class=&quot;ornament&quot;&gt;𓆓 𓅓 𓆓&lt;/div&gt;
+      &lt;p class=&quot;section-desc&quot;&gt;Os egípcios adoravam mais de 2&amp;nbsp;000 divindades. Cada deus personificava um aspeto da natureza, da vida humana ou da ordem cósmica — o &lt;em&gt;Maat&lt;/em&gt;. Os deuses podiam fundir-se, transformar-se e adquirir novos atributos ao longo dos séculos.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;gods-scroll-row&quot;&gt;
+
+      &lt;!-- Rá — relevo de Rá com disco solar, Wikimedia --&gt;
+      &lt;div class=&quot;god-tile reveal&quot;&gt;
+        &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Stele_Ra_Horakhty.jpg/400px-Stele_Ra_Horakhty.jpg&quot;
+          alt=&quot;Estela de Rá-Horakhty com disco solar&quot; class=&quot;god-img&quot; loading=&quot;lazy&quot;/&gt;
+        &lt;span class=&quot;god-hieroglyph&quot;&gt;𓇳&lt;/span&gt;
+        &lt;div class=&quot;god-name&quot;&gt;Rá&lt;/div&gt;
+        &lt;div class=&quot;god-domain&quot;&gt;Deus do Sol&lt;/div&gt;
+        &lt;p class=&quot;god-desc&quot;&gt;Rei dos deuses e criador do mundo. Viajava pelo céu numa barca dourada durante o dia, combatendo a serpente Apofis no submundo à noite.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Osíris — estátua Museu do Louvre, Wikimedia --&gt;
+      &lt;div class=&quot;god-tile reveal&quot; style=&quot;transition-delay:0.08s;&quot;&gt;
+        &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Osiris-statua.jpg/400px-Osiris-statua.jpg&quot;
+          alt=&quot;Estátua de Osíris no Museu do Louvre&quot; class=&quot;god-img&quot; loading=&quot;lazy&quot;/&gt;
+        &lt;span class=&quot;god-hieroglyph&quot;&gt;𓀭&lt;/span&gt;
+        &lt;div class=&quot;god-name&quot;&gt;Osíris&lt;/div&gt;
+        &lt;div class=&quot;god-domain&quot;&gt;Deus dos Mortos&lt;/div&gt;
+        &lt;p class=&quot;god-desc&quot;&gt;Senhor do mundo inferior e juiz das almas. Morto e ressuscitado por Ísis, tornou-se o símbolo da vida eterna e da ressurreição.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Ísis — estátua British Museum, Wikimedia --&gt;
+      &lt;div class=&quot;god-tile reveal&quot; style=&quot;transition-delay:0.16s;&quot;&gt;
+        &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Isis_-_British_Museum.jpg/400px-Isis_-_British_Museum.jpg&quot;
+          alt=&quot;Estátua de Ísis no British Museum&quot; class=&quot;god-img&quot; loading=&quot;lazy&quot;/&gt;
+        &lt;span class=&quot;god-hieroglyph&quot;&gt;𓇌&lt;/span&gt;
+        &lt;div class=&quot;god-name&quot;&gt;Ísis&lt;/div&gt;
+        &lt;div class=&quot;god-domain&quot;&gt;Deusa da Magia&lt;/div&gt;
+        &lt;p class=&quot;god-desc&quot;&gt;A grande mãe e feiticeira suprema. Ressuscitou Osíris e protegeu o filho Hórus. O seu culto espalhou-se por todo o Mediterrâneo até ao Império Romano.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Hórus — estátua falcão de Edfu, Wikimedia --&gt;
+      &lt;div class=&quot;god-tile reveal&quot; style=&quot;transition-delay:0.24s;&quot;&gt;
+        &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Horus_statue_in_Edfu.jpg/400px-Horus_statue_in_Edfu.jpg&quot;
+          alt=&quot;Estátua de granito do deus Hórus no templo de Edfu&quot; class=&quot;god-img&quot; loading=&quot;lazy&quot;/&gt;
+        &lt;span class=&quot;god-hieroglyph&quot;&gt;𓂀&lt;/span&gt;
+        &lt;div class=&quot;god-name&quot;&gt;Hórus&lt;/div&gt;
+        &lt;div class=&quot;god-domain&quot;&gt;Deus do Céu&lt;/div&gt;
+        &lt;p class=&quot;god-desc&quot;&gt;Representado como falcão ou homem com cabeça de falcão. O Olho de Hórus é um dos símbolos mais reconhecidos do Egito. Cada faraó era a sua encarnação viva.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Anúbis — estátua dourada da tumba de Tutancâmon, Wikimedia --&gt;
+      &lt;div class=&quot;god-tile reveal&quot; style=&quot;transition-delay:0.32s;&quot;&gt;
+        &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Anubis_standing.jpg/400px-Anubis_standing.jpg&quot;
+          alt=&quot;Figura de Anúbis em posição ereta&quot; class=&quot;god-img&quot; loading=&quot;lazy&quot;/&gt;
+        &lt;span class=&quot;god-hieroglyph&quot;&gt;𓀬&lt;/span&gt;
+        &lt;div class=&quot;god-name&quot;&gt;Anúbis&lt;/div&gt;
+        &lt;div class=&quot;god-domain&quot;&gt;Deus da Mumificação&lt;/div&gt;
+        &lt;p class=&quot;god-desc&quot;&gt;Com cabeça de chacal, guiava as almas dos mortos e supervisionava o embalsamamento. Ele pesava o coração do defunto contra a pena de Maat.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Thoth — estátua Museu Egípcio, Wikimedia --&gt;
+      &lt;div class=&quot;god-tile reveal&quot; style=&quot;transition-delay:0.4s;&quot;&gt;
+        &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Thoth.svg/400px-Thoth.svg.png&quot;
+          alt=&quot;Representação do deus Thoth com cabeça de íbis&quot; class=&quot;god-img&quot; loading=&quot;lazy&quot;
+          style=&quot;background:#1a1508; object-fit:contain; padding:0.5rem;&quot;/&gt;
+        &lt;span class=&quot;god-hieroglyph&quot;&gt;𓏤&lt;/span&gt;
+        &lt;div class=&quot;god-name&quot;&gt;Thoth&lt;/div&gt;
+        &lt;div class=&quot;god-domain&quot;&gt;Deus da Sabedoria&lt;/div&gt;
+        &lt;p class=&quot;god-desc&quot;&gt;Inventor da escrita e dos hieróglifos, deus da lua e do conhecimento. Com cabeça de íbis, registava o julgamento das almas e mediaçava entre os deuses.&lt;/p&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- SECÇÃO 5 — CULTURA CRISTÃ COPTA --&gt;
+&lt;section id=&quot;coptic&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;coptic-inner&quot;&gt;
+
+      &lt;div class=&quot;coptic-side reveal&quot;&gt;
+        &lt;div class=&quot;coptic-year-display&quot; aria-hidden=&quot;true&quot;&gt;AD&lt;br&gt;42&lt;/div&gt;
+        &lt;div class=&quot;coptic-timeline&quot;&gt;
+          &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-year&quot;&gt;42 d.C.&lt;/div&gt;&lt;div class=&quot;timeline-text&quot;&gt;São Marcos Evangelista funda a Igreja de Alexandria, levando o Evangelho ao Egito.&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-year&quot;&gt;Séc. III–IV&lt;/div&gt;&lt;div class=&quot;timeline-text&quot;&gt;Florescimento do monaquismo cristão. Santo António e São Pacómio retiram-se para o deserto egípcio, inaugurando a vida monástica cristã.&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-year&quot;&gt;325 d.C.&lt;/div&gt;&lt;div class=&quot;timeline-text&quot;&gt;Concílio de Niceia. Atanásio de Alexandria — o &quot;Pai da Ortodoxia&quot; — defende a divindade de Cristo contra o arianismo.&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-year&quot;&gt;451 d.C.&lt;/div&gt;&lt;div class=&quot;timeline-text&quot;&gt;Concílio de Calcedónia. A Igreja Copta separa-se de Roma e de Bizâncio, preservando uma cristologia única — o miafisismo.&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-year&quot;&gt;Séc. VII&lt;/div&gt;&lt;div class=&quot;timeline-text&quot;&gt;Conquista árabe do Egito. O árabe suplanta o copto como língua quotidiana, mas este sobrevive na liturgia sagrada.&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-year&quot;&gt;1945&lt;/div&gt;&lt;div class=&quot;timeline-text&quot;&gt;Descoberta dos Manuscritos de Nag Hammadi, textos gnósticos coptas que revolucionaram os estudos do Cristianismo primitivo.&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-year&quot;&gt;Hoje&lt;/div&gt;&lt;div class=&quot;timeline-text&quot;&gt;Cerca de 10 milhões de cristãos coptas no Egito. O copto litúrgico mantém vivo o idioma do Antigo Egito.&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;coptic-main reveal&quot; style=&quot;transition-delay:0.2s&quot;&gt;
+        &lt;p class=&quot;section-eyebrow&quot;&gt;Secção V&lt;/p&gt;
+        &lt;h2 class=&quot;section-title&quot;&gt;O Egito&lt;br&gt;&lt;span&gt;Cristão Copta&lt;/span&gt;&lt;/h2&gt;
+        &lt;div class=&quot;ornament&quot;&gt;✝ ☩ ✝&lt;/div&gt;
+
+        &lt;blockquote class=&quot;coptic-quote&quot;&gt;O povo copta é a mais direta descendência dos antigos egípcios. A sua língua — o copto — é a última forma viva do idioma falado pelos faraós, preservado não na rua, mas no silêncio sagrado das igrejas.&lt;/blockquote&gt;
+
+        &lt;p class=&quot;coptic-body&quot;&gt;Quando o apóstolo Marcos chegou à Alexandria por volta do ano 42 d.C., encontrou uma civilização que buscava a transcendência há milénios. O Cristianismo entrelaçou-se com a religião faraónica. A Cruz Ânkh, símbolo egípcio de vida eterna, fundiu-se com a Cruz cristã, tornando-se a Cruz Copta, símbolo de ressurreição e imortalidade.&lt;/p&gt;
+        &lt;p class=&quot;coptic-body&quot; style=&quot;margin-top:1.5rem;&quot;&gt;Os monges do deserto — António Abade, Pacómio, Macário — inauguraram o monaquismo cristão que viria a inspirar Bento de Núrsia e toda a tradição monástica ocidental. O Mosteiro de Santa Catarina, no Sinai, fundado no século VI, guarda o &lt;em&gt;Codex Sinaiticus&lt;/em&gt; — um dos mais antigos manuscritos completos da Bíblia grega. Hoje, é Património Mundial da UNESCO.&lt;/p&gt;
+
+        &lt;!-- Mosteiro de Santa Catarina — Wikimedia Commons --&gt;
+        &lt;div style=&quot;margin:2rem 0; position:relative; overflow:hidden; border:1px solid rgba(212,175,55,0.2);&quot;&gt;
+          &lt;img
+            src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Aerial_view_of_Saint_Catherine%27s_Monastery%2C_Sinai.jpg/1280px-Aerial_view_of_Saint_Catherine%27s_Monastery%2C_Sinai.jpg&quot;
+            alt=&quot;Vista aérea do Mosteiro de Santa Catarina no Sinai, Egito&quot;
+            style=&quot;width:100%; height:210px; object-fit:cover; display:block; filter:sepia(10%);&quot;
+            loading=&quot;lazy&quot;
+          /&gt;
+          &lt;div class=&quot;img-caption-wrap&quot;&gt;&lt;p class=&quot;img-caption&quot;&gt;Mosteiro de Santa Catarina, Sinai — séc. VI d.C.&lt;/p&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;coptic-tags&quot; style=&quot;margin-top:2rem;&quot;&gt;
+          &lt;span class=&quot;tag&quot;&gt;Igreja de Alexandria&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;Língua Copta&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;Cruz Ânkh&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;Monaquismo&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;São Marcos&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;Mosteiro de Sta. Catarina&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;Textos de Nag Hammadi&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;Atanásio de Alexandria&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;Codex Sinaiticus&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- SECÇÃO 6 — CULTURA MODERNA --&gt;
+&lt;section id=&quot;modern&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;modern-header&quot;&gt;
+      &lt;div class=&quot;reveal&quot;&gt;
+        &lt;p class=&quot;section-eyebrow&quot;&gt;Secção VI&lt;/p&gt;
+        &lt;h2 class=&quot;section-title&quot;&gt;Egito&lt;br&gt;&lt;span&gt;Contemporâneo&lt;/span&gt;&lt;/h2&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;reveal&quot; style=&quot;transition-delay:0.2s&quot;&gt;
+        &lt;p class=&quot;section-desc&quot;&gt;O Egito moderno, o &lt;em&gt;Masri&lt;/em&gt;, é um país de 105 milhões de pessoas que habita a encruzilhada entre o Mediterrâneo, África e o Médio Oriente. É uma cultura vibrante, ruidosa e profundamente humana — onde a história antiga pulsa no quotidiano.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Galeria com imagens temáticas reais do Wikimedia --&gt;
+    &lt;div class=&quot;modern-gallery reveal&quot;&gt;
+
+      &lt;!-- Mercado do Cairo — Khan el-Khalili --&gt;
+      &lt;div class=&quot;gallery-item&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Khan_el-Khalili_market%2C_Cairo%2C_Egypt%2C_Oct_2004.jpg/1280px-Khan_el-Khalili_market%2C_Cairo%2C_Egypt%2C_Oct_2004.jpg&quot;
+          alt=&quot;Mercado de Khan el-Khalili no Cairo, Egito&quot;
+          class=&quot;gallery-img&quot; loading=&quot;lazy&quot;
+          style=&quot;height:300px;&quot;
+        /&gt;
+        &lt;div class=&quot;gallery-info&quot;&gt;
+          &lt;div class=&quot;gallery-category&quot;&gt;Comércio &amp;amp; Cultura&lt;/div&gt;
+          &lt;div class=&quot;gallery-name&quot;&gt;Khan el-Khalili — O Grande Bazar do Cairo&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Oud — instrumento árabe --&gt;
+      &lt;div class=&quot;gallery-item&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Oud_p1030924.jpg/800px-Oud_p1030924.jpg&quot;
+          alt=&quot;Oud — instrumento de cordas da música árabe clássica&quot;
+          class=&quot;gallery-img&quot; loading=&quot;lazy&quot;
+        /&gt;
+        &lt;div class=&quot;gallery-info&quot;&gt;
+          &lt;div class=&quot;gallery-category&quot;&gt;Música&lt;/div&gt;
+          &lt;div class=&quot;gallery-name&quot;&gt;Oud — Alma da Música Árabe&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Cerâmica egípcia colorida --&gt;
+      &lt;div class=&quot;gallery-item&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Egypt_-_Cairo_-_Pottery_seller_%282%29.jpg/800px-Egypt_-_Cairo_-_Pottery_seller_%282%29.jpg&quot;
+          alt=&quot;Vendedor de cerâmica artesanal no Cairo, Egito&quot;
+          class=&quot;gallery-img&quot; loading=&quot;lazy&quot;
+        /&gt;
+        &lt;div class=&quot;gallery-info&quot;&gt;
+          &lt;div class=&quot;gallery-category&quot;&gt;Artesanato&lt;/div&gt;
+          &lt;div class=&quot;gallery-name&quot;&gt;Cerâmica Artesanal do Cairo&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Chá egípcio / karkadé --&gt;
+      &lt;div class=&quot;gallery-item&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Karkade.jpg/800px-Karkade.jpg&quot;
+          alt=&quot;Karkadé — chá de hibisco típico do Egito servido em copo de vidro&quot;
+          class=&quot;gallery-img&quot; loading=&quot;lazy&quot;
+        /&gt;
+        &lt;div class=&quot;gallery-info&quot;&gt;
+          &lt;div class=&quot;gallery-category&quot;&gt;Tradição&lt;/div&gt;
+          &lt;div class=&quot;gallery-name&quot;&gt;Karkadé — Chá de Hibisco Egípcio&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Lanternas do Ramadão --&gt;
+      &lt;div class=&quot;gallery-item&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Ramadan_lantern_egypt.jpg/800px-Ramadan_lantern_egypt.jpg&quot;
+          alt=&quot;Fanous — lanterna tradicional do Ramadão no Egito&quot;
+          class=&quot;gallery-img&quot; loading=&quot;lazy&quot;
+        /&gt;
+        &lt;div class=&quot;gallery-info&quot;&gt;
+          &lt;div class=&quot;gallery-category&quot;&gt;Festividades&lt;/div&gt;
+          &lt;div class=&quot;gallery-name&quot;&gt;Fanous — Lanternas do Ramadão&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Mesquita de Muhammad Ali — Cairo --&gt;
+      &lt;div class=&quot;gallery-item&quot;&gt;
+        &lt;img
+          src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Mosque_of_muhammad_ali.jpg/1280px-Mosque_of_muhammad_ali.jpg&quot;
+          alt=&quot;Mesquita de Muhammad Ali na Cidadela do Cairo ao pôr do sol&quot;
+          class=&quot;gallery-img&quot; loading=&quot;lazy&quot;
+          style=&quot;height:200px;&quot;
+        /&gt;
+        &lt;div class=&quot;gallery-info&quot;&gt;
+          &lt;div class=&quot;gallery-category&quot;&gt;Arquitetura&lt;/div&gt;
+          &lt;div class=&quot;gallery-name&quot;&gt;Mesquita de Muhammad Ali — Cidadela do Cairo&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+    &lt;!-- Cartões de destaque cultural --&gt;
+    &lt;div class=&quot;modern-features&quot;&gt;
+
+      &lt;div class=&quot;feature-card reveal&quot;&gt;
+        &lt;span class=&quot;feature-icon&quot;&gt;🍛&lt;/span&gt;
+        &lt;h3 class=&quot;feature-title&quot;&gt;Gastronomia — Koshari&lt;/h3&gt;
+        &lt;p class=&quot;feature-text&quot;&gt;O prato nacional do Egito é uma obra-prima da fusão: arroz, lentilhas, macarrão, grão-de-bico, molho de tomate picante e cebola frita crocante — tudo numa tigela. Criado no século XIX com influências italianas, indianas e árabes. Outros pratos essenciais incluem o &lt;em&gt;Ful Medames&lt;/em&gt; (feijão temperado) e o &lt;em&gt;Taameya&lt;/em&gt; (falafels de favas).&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;feature-card reveal&quot; style=&quot;transition-delay:0.15s&quot;&gt;
+        &lt;span class=&quot;feature-icon&quot;&gt;🎶&lt;/span&gt;
+        &lt;h3 class=&quot;feature-title&quot;&gt;Música — Maqam &amp;amp; Shaabi&lt;/h3&gt;
+        &lt;p class=&quot;feature-text&quot;&gt;A música egípcia é o coração cultural do mundo árabe. Umm Kulthum (1898–1975) — &quot;A Estrela do Oriente&quot; — gravava concertos de 3 horas transmitidos em todo o Médio Oriente e Norte de África. O sistema modal &lt;em&gt;Maqam&lt;/em&gt; estrutura melodias de uma complexidade emocional sem paralelo. O &lt;em&gt;Shaabi&lt;/em&gt; e o Mahraganat eletrónico dominam hoje os festivais populares do Cairo.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;feature-card reveal&quot; style=&quot;transition-delay:0.3s&quot;&gt;
+        &lt;span class=&quot;feature-icon&quot;&gt;🌙&lt;/span&gt;
+        &lt;h3 class=&quot;feature-title&quot;&gt;Costumes &amp;amp; Festividades&lt;/h3&gt;
+        &lt;p class=&quot;feature-text&quot;&gt;O &lt;em&gt;Sham El-Nessim&lt;/em&gt; — &quot;Farejar a Brisa&quot; — é uma festividade de primavera celebrada há 4&amp;nbsp;500 anos, sobrevivendo a todas as mudanças religiosas. O Ramadão transforma o Cairo numa festa noturna de lanternas (&lt;em&gt;fanous&lt;/em&gt;) e &lt;em&gt;iftars&lt;/em&gt; coletivos. O &lt;em&gt;Zar&lt;/em&gt;, ritual de transe com raízes na Núbia, e a dança do ventre (&lt;em&gt;Raqs Sharqi&lt;/em&gt;) completam a tapeçaria cultural.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;feature-card reveal&quot; style=&quot;transition-delay:0.45s&quot;&gt;
+        &lt;span class=&quot;feature-icon&quot;&gt;🏛️&lt;/span&gt;
+        &lt;h3 class=&quot;feature-title&quot;&gt;Grande Museu Egípcio — GEM&lt;/h3&gt;
+        &lt;p class=&quot;feature-text&quot;&gt;O Grand Egyptian Museum, inaugurado em 2023 junto às Pirâmides de Gizé, é o maior museu arqueológico do mundo. Ocupa 480&amp;nbsp;000 m² e alberga mais de 100&amp;nbsp;000 artefactos, incluindo a colecção completa de Tutancâmon com os seus 5&amp;nbsp;000 objetos dourados. A sua abertura foi considerada um dos acontecimentos culturais mais significativos do século XXI.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;feature-card reveal&quot; style=&quot;transition-delay:0.6s&quot;&gt;
+        &lt;span class=&quot;feature-icon&quot;&gt;📚&lt;/span&gt;
+        &lt;h3 class=&quot;feature-title&quot;&gt;Literatura &amp;amp; Cinema Árabe&lt;/h3&gt;
+        &lt;p class=&quot;feature-text&quot;&gt;Naguib Mahfouz, egípcio do Cairo, foi o primeiro escritor árabe a receber o Prémio Nobel da Literatura (1988), com a sua &lt;em&gt;Trilogia do Cairo&lt;/em&gt;. O cinema egípcio — produzido em árabe dialetal egípcio — dominou as telas árabes durante décadas, tornando o dialeto cairota o árabe mais compreendido em todo o mundo árabe.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;feature-card reveal&quot; style=&quot;transition-delay:0.75s&quot;&gt;
+        &lt;span class=&quot;feature-icon&quot;&gt;⛵&lt;/span&gt;
+        &lt;h3 class=&quot;feature-title&quot;&gt;Canal de Suez&lt;/h3&gt;
+        &lt;p class=&quot;feature-text&quot;&gt;Inaugurado em 1869, o Canal de Suez liga o Mar Mediterrâneo ao Mar Vermelho, eliminando a necessidade de circum-navegar África. Hoje atravessa-o cerca de 12% do comércio mundial. A sua nacionalização por Nasser em 1956 foi um momento definidor do pós-colonialismo e da soberania egípcia moderna.&lt;/p&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- RODAPÉ --&gt;
+&lt;footer&gt;
+  &lt;div class=&quot;footer-symbol&quot; aria-hidden=&quot;true&quot;&gt;𓂀&lt;/div&gt;
+  &lt;div class=&quot;footer-title&quot;&gt;KEMET&lt;/div&gt;
+  &lt;p class=&quot;footer-sub&quot;&gt;A Terra Negra — Eternamente Fértil&lt;/p&gt;
+  &lt;ul class=&quot;footer-nav&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;#hero&quot;&gt;Início&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#geography&quot;&gt;Geografia&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#ancient&quot;&gt;Cultura Antiga&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#pharaohs&quot;&gt;Faraós&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#gods&quot;&gt;Deuses&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#coptic&quot;&gt;Tradição Copta&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#modern&quot;&gt;Egito Moderno&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div class=&quot;footer-line&quot;&gt;&lt;/div&gt;
+  &lt;p class=&quot;footer-copy&quot;&gt;𓏤 &amp;nbsp; Egito: O Berço das Civilizações &amp;nbsp; 𓏤&lt;/p&gt;
+&lt;/footer&gt;
+
+&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        </div>
+
+        <!-- CSS -->
+        <div id="panel-css" class="tab-panel">
+            <div class="code-toolbar">
+                <span>style.css</span>
+                <button class="copy-btn" onclick="copyCode('panel-css')">Copiar</button>
+            </div>
+            <pre><code class="language-css" id="code-css">/* =============================================
+   VARIÁVEIS CSS &amp; RESET GLOBAL
+   ============================================= */
+:root {
+  --gold:        #D4AF37;
+  --gold-light:  #F0D060;
+  --gold-dark:   #9A7B1A;
+  --sand:        #EDD9A3;
+  --sand-dark:   #C8A96E;
+  --lapis:       #1A3A5C;
+  --lapis-light: #2E5F8A;
+  --black:       #0D0B07;
+  --dark:        #1A1508;
+  --ink:         #2C2410;
+  --cream:       #FAF3E0;
+  --copper:      #B87333;
+  --white:       #FFFDF5;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: &#x27;Cairo&#x27;, sans-serif;
+  background: var(--black);
+  color: var(--cream);
+  overflow-x: hidden;
+}
+
+/* =============================================
+   BARRA DE DESLOCAMENTO
+   ============================================= */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* =============================================
+   BARRA DE NAVEGAÇÃO
+   ============================================= */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.5s ease;
+}
+
+nav.scrolled {
+  background: rgba(13, 11, 7, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 0.6rem 3rem;
+}
+
+.nav-logo {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--sand); }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--sand);
+  text-decoration: none;
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-links a::after {
+  content: &#x27;&#x27;;
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.nav-burger span {
+  display: block;
+  width: 26px; height: 2px;
+  background: var(--gold);
+  transition: all 0.3s;
+}
+
+/* =============================================
+   SECÇÃO HERO
+   ============================================= */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 80%, rgba(212,175,55,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse at 20% 20%, rgba(26,58,92,0.3) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(13,11,7,0.3) 0%, rgba(13,11,7,0.7) 100%),
+    url(&#x27;https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=1600&amp;q=80&#x27;) center/cover no-repeat;
+}
+
+/* Partículas de areia animadas */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: drift linear infinite;
+}
+
+@keyframes drift {
+  0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { transform: translateY(-10vh) translateX(40px); opacity: 0; }
+}
+
+.hero-eyebrow {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.72rem;
+  letter-spacing: 8px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.3s forwards;
+}
+
+.hero-title {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: clamp(2.8rem, 7vw, 6.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.6s forwards;
+}
+
+.hero-title .accent {
+  display: block;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--sand-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  color: var(--sand);
+  max-width: 680px;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.9s forwards;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2.5rem;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 1s 1.2s forwards;
+}
+
+.hero-cta::before {
+  content: &#x27;&#x27;;
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-101%);
+  transition: transform 0.4s ease;
+  z-index: -1;
+}
+
+.hero-cta:hover { color: var(--black); }
+.hero-cta:hover::before { transform: translateX(0); }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeIn 1s 2s forwards;
+}
+
+.hero-scroll span {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.6rem;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollLine 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0%, 100% { transform: scaleY(1); transform-origin: top; }
+  50%       { transform: scaleY(0.4); transform-origin: top; }
+}
+
+/* Decoração hieroglífica */
+.hero-hieroglyphs {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 0.15;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =============================================
+   ESTILOS COMUNS DAS SECÇÕES
+   ============================================= */
+section { padding: 7rem 0; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+.section-eyebrow {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.65rem;
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: &#x27;&#x27;;
+  flex: 0 0 30px;
+  height: 1px;
+  background: var(--gold-dark);
+}
+
+.section-title {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.section-title span { color: var(--gold); }
+
+.section-desc {
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-size: 1.2rem;
+  color: var(--sand);
+  line-height: 1.9;
+  max-width: 600px;
+}
+
+/* Ornamento decorativo */
+.ornament {
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--gold-dark);
+  font-size: 1.2rem;
+  letter-spacing: 12px;
+  opacity: 0.5;
+}
+
+/* Animação de revelação ao rolar */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* =============================================
+   SECÇÃO 1: GEOGRAFIA E MAPA
+   ============================================= */
+#geography {
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+#geography::before {
+  content: &#x27;&#x27;;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+}
+
+.geo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.geo-map-wrapper {
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.2), 0 30px 80px rgba(0,0,0,0.5);
+}
+
+.geo-map-wrapper::before {
+  content: &#x27;&#x27;;
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(212,175,55,0.15);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Cantos dourados decorativos */
+.geo-map-wrapper::after {
+  content: &#x27;&#x27;;
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 30px; height: 30px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.map-corner-br {
+  position: absolute;
+  bottom: 8px; right: 8px;
+  width: 30px; height: 30px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.geo-map-wrapper iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: none;
+  filter: sepia(30%) contrast(1.1) brightness(0.85);
+}
+
+.geo-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+
+.geo-stat {
+  border: 1px solid rgba(212,175,55,0.15);
+  padding: 1.2rem;
+  background: rgba(212,175,55,0.03);
+  transition: all 0.3s;
+}
+
+.geo-stat:hover {
+  border-color: rgba(212,175,55,0.5);
+  background: rgba(212,175,55,0.06);
+  transform: translateY(-2px);
+}
+
+.geo-stat-num {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.geo-stat-label {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--sand-dark);
+  text-transform: uppercase;
+  font-family: &#x27;Cinzel&#x27;, serif;
+}
+
+/* =============================================
+   SECÇÃO 2: EGITO ANTIGO
+   ============================================= */
+#ancient {
+  background: var(--black);
+  position: relative;
+}
+
+.ancient-intro {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 5rem;
+}
+
+.ancient-intro .section-desc { max-width: 100%; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.card {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(212,175,55,0.1);
+}
+
+.card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .card-bg { transform: scale(1.08); }
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(13,11,7,0.95) 0%,
+    rgba(13,11,7,0.6) 40%,
+    rgba(13,11,7,0.1) 100%
+  );
+  transition: background 0.5s;
+}
+
+.card:hover .card-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(13,11,7,0.98) 0%,
+    rgba(26,58,92,0.5) 100%
+  );
+}
+
+.card-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem;
+  transition: transform 0.5s ease;
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.card-label {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-size: 1.05rem;
+  color: var(--sand);
+  line-height: 1.8;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s 0.1s, max-height 0.5s;
+}
+
+.card:hover .card-desc {
+  opacity: 1;
+  max-height: 200px;
+}
+
+.card-line {
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 0.8rem;
+  transition: width 0.5s;
+}
+
+.card:hover .card-line { width: 40px; }
+
+/* =============================================
+   SECÇÃO 3: EGITO CRISTÃO COPTA
+   ============================================= */
+#coptic {
+  background: var(--lapis);
+  position: relative;
+  overflow: hidden;
+}
+
+#coptic::before {
+  content: &#x27;&#x27;;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(212,175,55,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 100%, rgba(212,175,55,0.08) 0%, transparent 50%);
+}
+
+.coptic-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.coptic-side { position: relative; }
+
+.coptic-year-display {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(212,175,55,0.1);
+  line-height: 1;
+  letter-spacing: -4px;
+  position: absolute;
+  top: -1rem; left: -1rem;
+  user-select: none;
+}
+
+.coptic-timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin-top: 6rem;
+}
+
+.coptic-timeline::before {
+  content: &#x27;&#x27;;
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), rgba(212,175,55,0.1));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-item::before {
+  content: &#x27;&#x27;;
+  position: absolute;
+  left: -2.4rem; top: 0.35rem;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--lapis);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+}
+
+.timeline-year {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.timeline-text {
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-size: 1.05rem;
+  color: var(--sand);
+  line-height: 1.7;
+}
+
+.coptic-main { padding-top: 1rem; }
+
+.coptic-quote {
+  border-left: 3px solid var(--gold);
+  padding: 1.5rem 2rem;
+  margin: 2.5rem 0;
+  background: rgba(212,175,55,0.05);
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.8;
+  position: relative;
+}
+
+.coptic-quote::before {
+  content: &#x27;&quot;&#x27;;
+  position: absolute;
+  top: -0.5rem; left: 1rem;
+  font-size: 5rem;
+  color: var(--gold);
+  opacity: 0.15;
+  font-family: &#x27;Cinzel&#x27;, serif;
+  line-height: 1;
+}
+
+.coptic-body {
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-size: 1.15rem;
+  color: var(--sand);
+  line-height: 2;
+}
+
+.coptic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.tag {
+  padding: 0.35rem 1rem;
+  border: 1px solid rgba(212,175,55,0.3);
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.tag:hover {
+  background: var(--gold);
+  color: var(--black);
+  cursor: default;
+}
+
+/* =============================================
+   SECÇÃO 4: EGITO MODERNO
+   ============================================= */
+#modern {
+  background: var(--dark);
+  position: relative;
+}
+
+.modern-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  margin-bottom: 4rem;
+}
+
+.modern-gallery {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto;
+  gap: 1px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--ink);
+}
+
+.gallery-item:nth-child(1) { grid-column: span 3; grid-row: span 2; }
+.gallery-item:nth-child(2) { grid-column: span 2; }
+.gallery-item:nth-child(3) { grid-column: span 1; }
+.gallery-item:nth-child(4) { grid-column: span 1; }
+.gallery-item:nth-child(5) { grid-column: span 2; }
+.gallery-item:nth-child(6) { grid-column: span 3; grid-row: span 1; }
+
+.gallery-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: linear-gradient(135deg, #1a1508, #2c2410);
+  transition: transform 0.6s ease;
+}
+
+.gallery-item:nth-child(1) .gallery-img-placeholder { aspect-ratio: 1; }
+.gallery-item:nth-child(6) .gallery-img-placeholder { aspect-ratio: 2/1; }
+
+.gallery-item:hover .gallery-img-placeholder { transform: scale(1.05); }
+
+.gallery-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-info { transform: none; }
+
+.gallery-category {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.gallery-name {
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-size: 1.1rem;
+  color: var(--white);
+}
+
+/* Cartões de destaque */
+.modern-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.feature-card {
+  padding: 2rem;
+  border: 1px solid rgba(212,175,55,0.1);
+  background: rgba(212,175,55,0.02);
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: &#x27;&#x27;;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+
+.feature-card:hover { border-color: rgba(212,175,55,0.35); }
+.feature-card:hover::before { transform: scaleX(1); }
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.feature-title {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 1rem;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.feature-text {
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-size: 1.05rem;
+  color: var(--sand);
+  line-height: 1.8;
+}
+
+/* =============================================
+   RODAPÉ
+   ============================================= */
+footer {
+  background: var(--black);
+  border-top: 1px solid rgba(212,175,55,0.15);
+  padding: 4rem 2.5rem 2rem;
+  text-align: center;
+}
+
+.footer-symbol {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  filter: grayscale(30%);
+}
+
+.footer-title {
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  letter-spacing: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.footer-sub {
+  font-family: &#x27;Cormorant Garamond&#x27;, serif;
+  font-style: italic;
+  color: var(--sand-dark);
+  font-size: 1rem;
+  margin-bottom: 3rem;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  list-style: none;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.footer-nav a {
+  color: var(--sand-dark);
+  text-decoration: none;
+  font-family: &#x27;Cinzel&#x27;, serif;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover { color: var(--gold); }
+
+.footer-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent);
+  margin-bottom: 2rem;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: rgba(212,175,55,0.3);
+  font-family: &#x27;Cinzel&#x27;, serif;
+  letter-spacing: 2px;
+}
+
+/* =============================================
+   RESPONSIVO
+   ============================================= */
+@media (max-width: 1024px) {
+  .geo-grid             { grid-template-columns: 1fr; gap: 3rem; }
+  .coptic-inner         { grid-template-columns: 1fr; gap: 2rem; }
+  .coptic-year-display  { font-size: 4rem; }
+  .cards-grid           { grid-template-columns: 1fr 1fr; }
+  .cards-grid .card:last-child { grid-column: span 2; height: 320px; }
+  .modern-header        { grid-template-columns: 1fr; gap: 1.5rem; }
+  .modern-gallery       { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .gallery-item:nth-child(6) { grid-column: span 2; }
+  .gallery-item:nth-child(2),
+  .gallery-item:nth-child(3),
+  .gallery-item:nth-child(4),
+  .gallery-item:nth-child(5) { grid-column: span 1; }
+  .modern-features      { grid-template-columns: 1fr 1fr; }
+  nav                   { padding: 1rem 1.5rem; }
+  nav.scrolled          { padding: 0.6rem 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; gap: 0; }
+  .nav-links.open {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(13,11,7,0.97);
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    z-index: 999;
+  }
+  .nav-links.open a      { font-size: 1.1rem; }
+  .nav-burger            { display: flex; }
+  .cards-grid            { grid-template-columns: 1fr; }
+  .cards-grid .card:last-child { grid-column: span 1; height: 380px; }
+  .card                  { height: 350px; }
+  .modern-features       { grid-template-columns: 1fr; }
+  .geo-stats             { grid-template-columns: 1fr 1fr; }
+  section                { padding: 5rem 0; }
+  .hero-hieroglyphs      { display: none; }
+  .coptic-timeline       { margin-top: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .modern-gallery { grid-template-columns: 1fr; }
+  .gallery-item   { grid-column: span 1 !important; grid-row: span 1 !important; }
+  .gallery-info   { transform: none; }
+  .geo-stats      { grid-template-columns: 1fr; }
+}
+</code></pre>
+        </div>
+
+        <!-- JS -->
+        <div id="panel-js" class="tab-panel">
+            <div class="code-toolbar">
+                <span>script.js</span>
+                <button class="copy-btn" onclick="copyCode('panel-js')">Copiar</button>
+            </div>
+            <pre><code class="language-javascript" id="code-js">/* =============================================
+   EGITO: O BERÇO DAS CIVILIZAÇÕES
+   script.js — Interatividade e Animações
+   ============================================= */
+
+/* -----------------------------------------------
+   BARRA DE NAVEGAÇÃO — Comportamento ao rolar
+   ----------------------------------------------- */
+const navbar   = document.getElementById(&#x27;navbar&#x27;);
+const burger   = document.getElementById(&#x27;burger&#x27;);
+const navLinks = document.getElementById(&#x27;navLinks&#x27;);
+
+window.addEventListener(&#x27;scroll&#x27;, () =&gt; {
+  navbar.classList.toggle(&#x27;scrolled&#x27;, window.scrollY &gt; 60);
+});
+
+/* -----------------------------------------------
+   MENU HAMBÚRGUER — Abertura e fecho
+   ----------------------------------------------- */
+burger.addEventListener(&#x27;click&#x27;, () =&gt; {
+  navLinks.classList.toggle(&#x27;open&#x27;);
+  const spans = burger.querySelectorAll(&#x27;span&#x27;);
+
+  if (navLinks.classList.contains(&#x27;open&#x27;)) {
+    spans[0].style.transform = &#x27;rotate(45deg) translate(5px,5px)&#x27;;
+    spans[1].style.opacity   = &#x27;0&#x27;;
+    spans[2].style.transform = &#x27;rotate(-45deg) translate(5px,-5px)&#x27;;
+  } else {
+    spans.forEach(s =&gt; { s.style.transform = &#x27;&#x27;; s.style.opacity = &#x27;&#x27;; });
+  }
+});
+
+/**
+ * Fecha o menu de navegação móvel.
+ * Chamado pelos links de âncora dentro do menu.
+ */
+function closeMenu() {
+  navLinks.classList.remove(&#x27;open&#x27;);
+  burger.querySelectorAll(&#x27;span&#x27;).forEach(s =&gt; {
+    s.style.transform = &#x27;&#x27;;
+    s.style.opacity   = &#x27;&#x27;;
+  });
+}
+
+/* -----------------------------------------------
+   HERO — Partículas de areia animadas
+   ----------------------------------------------- */
+const particleContainer = document.getElementById(&#x27;particles&#x27;);
+const PARTICLE_COUNT    = 28;
+
+for (let i = 0; i &lt; PARTICLE_COUNT; i++) {
+  const p = document.createElement(&#x27;div&#x27;);
+  p.className = &#x27;particle&#x27;;
+  p.style.left              = Math.random() * 100 + &#x27;%&#x27;;
+  p.style.bottom            = &#x27;-10px&#x27;;
+  p.style.width             = (Math.random() * 3 + 1) + &#x27;px&#x27;;
+  p.style.height            = p.style.width;
+  p.style.animationDuration = (Math.random() * 12 + 8) + &#x27;s&#x27;;
+  p.style.animationDelay    = (Math.random() * 10) + &#x27;s&#x27;;
+  p.style.opacity           = String(Math.random() * 0.5);
+  particleContainer.appendChild(p);
+}
+
+/* -----------------------------------------------
+   ANIMAÇÃO DE REVELAÇÃO AO ROLAR
+   ----------------------------------------------- */
+const revealEls = document.querySelectorAll(&#x27;.reveal&#x27;);
+
+const revealObserver = new IntersectionObserver((entries) =&gt; {
+  entries.forEach(entry =&gt; {
+    if (!entry.isIntersecting) return;
+
+    /* Escalonamento por posição entre irmãos */
+    const irmaos = [...entry.target.parentElement.querySelectorAll(&#x27;.reveal&#x27;)];
+    const indice = irmaos.indexOf(entry.target);
+
+    setTimeout(() =&gt; {
+      entry.target.classList.add(&#x27;visible&#x27;);
+    }, indice * 80);
+
+    revealObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el =&gt; revealObserver.observe(el));
+
+/* -----------------------------------------------
+   NAVEGAÇÃO — Destaque do link ativo ao rolar
+   ----------------------------------------------- */
+const secoes       = document.querySelectorAll(&#x27;section[id]&#x27;);
+const navAncorados = document.querySelectorAll(&#x27;.nav-links a&#x27;);
+
+window.addEventListener(&#x27;scroll&#x27;, () =&gt; {
+  let atual = &#x27;&#x27;;
+  secoes.forEach(s =&gt; {
+    if (window.scrollY &gt;= s.offsetTop - 200) atual = s.id;
+  });
+  navAncorados.forEach(a =&gt; {
+    a.style.color = a.getAttribute(&#x27;href&#x27;) === &#x27;#&#x27; + atual
+      ? &#x27;var(--gold)&#x27;
+      : &#x27;&#x27;;
+  });
+}, { passive: true });
+
+/* -----------------------------------------------
+   ESTATÍSTICAS — Animação de contador
+   ----------------------------------------------- */
+
+/**
+ * Anima o número de uma estatística geográfica do zero ao valor final.
+ * @param {HTMLElement} el - O elemento .geo-stat a animar
+ */
+function animarContador(el) {
+  const texto = el.querySelector(&#x27;.geo-stat-num&#x27;);
+  if (!texto || texto.dataset.animado) return;
+  texto.dataset.animado = &#x27;1&#x27;;
+
+  const correspondencia = texto.textContent.match(/[\d\s,]+/);
+  if (!correspondencia) return;
+
+  const objetivo = parseInt(correspondencia[0].replace(/\s/g, &#x27;&#x27;));
+  const sufixo   = texto.innerHTML.replace(correspondencia[0], &#x27;&#x27;);
+  let   inicio   = 0;
+  const duracao  = 1600;
+
+  const passo = timestamp =&gt; {
+    if (!inicio) inicio = timestamp;
+    const progresso = Math.min((timestamp - inicio) / duracao, 1);
+    const valor     = Math.floor(progresso * objetivo);
+    texto.innerHTML = valor.toLocaleString(&#x27;pt-PT&#x27;) + sufixo;
+    if (progresso &lt; 1) requestAnimationFrame(passo);
+  };
+
+  requestAnimationFrame(passo);
+}
+
+const contadorObserver = new IntersectionObserver(entries =&gt; {
+  entries.forEach(e =&gt; {
+    if (e.isIntersecting) animarContador(e.target);
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll(&#x27;.geo-stat&#x27;).forEach(s =&gt; contadorObserver.observe(s));
+</code></pre>
+        </div>
+
+    </div>
+
+    <a href="index.html" style="display:block; max-width:700px; margin:1.5rem auto; padding:0 24px;">← Voltar atrás</a>
+
+    <script>
+        hljs.highlightAll();
+
+        function switchTab(name, btn) {
+            // paineis
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('panel-' + name).classList.add('active');
+            // botões
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function copyCode(panelId) {
+            const code = document.querySelector('#' + panelId + ' code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('#' + panelId + ' .copy-btn');
+                btn.textContent = 'Copiado!';
+                setTimeout(() => btn.textContent = 'Copiar', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

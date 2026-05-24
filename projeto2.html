@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto 2 – Site de Ajuda Humanitária</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        .project-header { margin-top: 3rem; margin-bottom: 0.4rem; }
+        .project-meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
+        .code-wrapper {
+            max-width: 700px;
+            margin: 0 auto 1rem;
+            padding: 0 24px;
+        }
+        .code-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1e2029;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            padding: 0.6rem 1rem;
+        }
+        .code-toolbar span { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-body); }
+        .copy-btn {
+            font-size: 0.78rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.2rem 0.7rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+        pre {
+            margin: 0 !important;
+            border-radius: 0 0 10px 10px !important;
+            border: 1px solid var(--border);
+            font-size: 0.875rem !important;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        pre code.hljs { border-radius: 0 0 10px 10px; }
+    </style>
+</head>
+<body>
+    <h1 class="project-header">Site de Ajuda Humanitária – MediReach</h1>
+    <p class="project-meta">Projeto 2 · HTML &amp; CSS · Disciplina de AI</p>
+    <p>Eu e um colega de turma criámos a associação humanitária <strong>MediReach</strong> e desenvolvemos este site para apresentar à turma.</p>
+
+    <div class="code-wrapper">
+        <div class="code-toolbar">
+            <span>projeto2.html</span>
+            <button class="copy-btn" onclick="copyCode()">Copiar</button>
+        </div>
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;MediReach (MDR)&lt;/title&gt;
+&lt;style&gt;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+body{background:#FFFFFF;color:#333;line-height:1.6;}
+h1,h2,h3{color:#1d3557;}
+p{margin-bottom:15px;}
+header{background:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.1);position:sticky;top:0;z-index:1000;}
+.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:bold;color:#1d3557;}
+.logo-icon{width:45px;height:45px;}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav ul li{position:relative;}
+nav a{text-decoration:none;color:#333;font-weight:500;padding:5px;display:block;transition:0.3s;}
+nav a:hover{color:#1d3557;}
+.submenu{display:none;position:absolute;background:white;top:30px;left:0;box-shadow:0 5px 15px rgba(0,0,0,0.2);border-radius:5px;min-width:160px;}
+.submenu li{padding:10px;}
+nav li:hover .submenu{display:block;}
+.volunteer{background:#2a9d8f;color:white;padding:8px 16px;border-radius:5px;}
+.volunteer:hover{background:#21867a;}
+.donate{background:#e63946;color:white;padding:8px 16px;border-radius:5px;}
+.page{display:none;padding:60px 10%;}
+.page.active{display:block;}
+.hero{background:white;color:#1d3557;padding:80px 20px;text-align:center;border-radius:8px;margin-bottom:40px;}
+.hero h1{font-size:40px;margin-bottom:10px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-top:30px;}
+.card{background:white;padding:20px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);text-align:center;}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:10px;}
+.map-container{position:relative;max-width:900px;margin:auto;margin-top:30px;}
+.map-container img{width:100%;display:block;}
+.pin{width:16px;height:16px;background:#e63946;border-radius:50%;position:absolute;cursor:pointer;border:2px solid white;box-shadow:0 0 8px rgba(0,0,0,0.4);}
+.p-1{top:65%;left:30%;}
+.p-2{top:70%;left:55%;}
+.p-3{top:50%;left:60%;}
+.p-4{top:55%;left:80%;}
+.split-section{display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+.split-text{flex:1;}
+.split-text ul{padding-left:20px;}
+.split-text li{margin-bottom:10px;}
+.split-image{flex:1;}
+.split-image img{width:100%;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+.programas-founded{display:inline-flex;align-items:center;gap:10px;background:#1d3557;color:white;padding:10px 22px;border-radius:30px;font-size:15px;font-weight:600;margin-bottom:40px;letter-spacing:0.3px;}
+.timeline{position:relative;max-width:820px;margin:0 auto 20px auto;padding-left:30px;}
+.timeline::before{content:&#x27;&#x27;;position:absolute;left:14px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#1d3557,#e63946);border-radius:3px;}
+.timeline-item{position:relative;margin-bottom:32px;padding-left:30px;}
+.timeline-dot{position:absolute;left:-23px;top:14px;width:14px;height:14px;background:#e63946;border:3px solid white;border-radius:50%;box-shadow:0 0 0 2px #1d3557;}
+.timeline-card{background:white;border-radius:10px;padding:18px 22px;box-shadow:0 4px 14px rgba(0,0,0,0.08);border-left:4px solid #1d3557;transition:transform 0.2s,box-shadow 0.2s;}
+.timeline-card:hover{transform:translateX(4px);box-shadow:0 6px 20px rgba(0,0,0,0.13);}
+.timeline-year{display:inline-block;background:#1d3557;color:white;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px;letter-spacing:0.5px;}
+.timeline-card h3{font-size:16px;margin-bottom:4px;color:#1d3557;}
+.timeline-card p{font-size:14px;color:#555;margin-bottom:0;line-height:1.5;}
+.contact{background:white;padding:30px;border-radius:10px;max-width:500px;margin:0 auto;box-shadow:0 5px 15px rgba(0,0,0,0.1);text-align:center;}
+.contact form{text-align:left;}
+input,textarea,select{width:100%;padding:8px;margin:8px 0 16px 0;border:1px solid #ccc;border-radius:5px;}
+button{background:#1d3557;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;}
+button:hover{background:#e63946;}
+footer{background:#1d3557;color:white;text-align:center;padding:30px;margin-top:40px;}
+@media(max-width:900px){.grid{grid-template-columns:1fr;}nav ul{flex-direction:column;position:absolute;background:white;top:70px;right:0;width:200px;display:none;padding:20px;box-shadow:0 5px 15px rgba(0,0,0,0.2);}nav ul.show{display:block;}.menu-toggle{display:block;cursor:pointer;font-size:24px;}}
+.menu-toggle{display:none;}
+#contacto h1,#voluntario h1{text-align:center;margin-bottom:30px;}
+&lt;/style&gt;
+&lt;script&gt;
+function openPage(id){
+  document.querySelectorAll(&quot;.page&quot;).forEach(p=&gt;p.classList.remove(&quot;active&quot;));
+  document.getElementById(id).classList.add(&quot;active&quot;);
+}
+function toggleMenu(){
+  document.getElementById(&quot;menuList&quot;).classList.toggle(&quot;show&quot;);
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+  &lt;div class=&quot;logo&quot;&gt;
+    &lt;svg class=&quot;logo-icon&quot; viewBox=&quot;0 0 100 100&quot;&gt;
+      &lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;45&quot; stroke=&quot;#1d3557&quot; stroke-width=&quot;4&quot; fill=&quot;white&quot;/&gt;
+      &lt;ellipse cx=&quot;50&quot; cy=&quot;50&quot; rx=&quot;30&quot; ry=&quot;45&quot; stroke=&quot;#1d3557&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/&gt;
+      &lt;ellipse cx=&quot;50&quot; cy=&quot;50&quot; rx=&quot;45&quot; ry=&quot;18&quot; stroke=&quot;#1d3557&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/&gt;
+      &lt;rect x=&quot;44&quot; y=&quot;28&quot; width=&quot;12&quot; height=&quot;44&quot; fill=&quot;#e63946&quot;/&gt;
+      &lt;rect x=&quot;28&quot; y=&quot;44&quot; width=&quot;44&quot; height=&quot;12&quot; fill=&quot;#e63946&quot;/&gt;
+    &lt;/svg&gt;
+    &lt;span&gt;MediReach&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;menu-toggle&quot; onclick=&quot;toggleMenu()&quot;&gt;&amp;#9776;&lt;/div&gt;
+  &lt;nav&gt;
+    &lt;ul id=&quot;menuList&quot;&gt;
+      &lt;li&lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;inicio&#x27;)&quot;&gt;Início&lt;/a&gt;&lt;/li&gt;gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;inicio&#x27;)&quot;&gt;Início&lt;/a&gt;&lt;/li&gt;#x27;inicio&lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;inicio&#x27;)&quot;&gt;Início&lt;/a&gt;&lt;/li&gt;#x27;)&quot;&gt;Início&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;Sobre&lt;/a&gt;
+        &lt;ul class=&quot;submenu&quot;&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;missao&#x27;)&quot;&gt;Missão&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;visao&#x27;)&quot;&gt;Visão&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;projetos&#x27;)&quot;&gt;Projetos Contínuos&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;equipa&#x27;)&quot;&gt;Equipa&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;programas&#x27;)&quot;&gt;Programas&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot; onclick=&quot;openPage(&#x27;contacto&#x27;)&quot;&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;volunteer&quot; href=&quot;#&quot; onclick=&quot;openPage(&#x27;voluntario&#x27;)&quot;&gt;Voluntariar-se&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;donate&quot; href=&quot;https://www.paypal.com/donate&quot;&gt;Doar&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;!-- INICIO --&gt;
+&lt;section id=&quot;inicio&quot; class=&quot;page active&quot;&gt;
+  &lt;div class=&quot;hero&quot;&gt;
+    &lt;h1&gt;Saúde sem Fronteiras&lt;/h1&gt;
+    &lt;p&gt;Levamos assistência médica e psicológica às comunidades mais vulneráveis do mundo.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;Mapa Global de Atuação&lt;/h2&gt;
+  &lt;div class=&quot;map-container&quot;&gt;
+    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg&quot;&gt;
+    &lt;div class=&quot;pin p-1&quot; onclick=&quot;alert(&#x27;Missão América do Sul: Ativa&#x27;)&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;pin p-2&quot; onclick=&quot;alert(&#x27;Missão África Austral: Ativa&#x27;)&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;pin p-3&quot; onclick=&quot;alert(&#x27;Missão Corno de África: Emergência&#x27;)&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;pin p-4&quot; onclick=&quot;alert(&#x27;Missão Sudeste Asiático: Ativa&#x27;)&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- EQUIPA --&gt;
+&lt;section id=&quot;equipa&quot; class=&quot;page&quot;&gt;
+  &lt;h1&gt;Hierarquia da MediReach&lt;/h1&gt;
+  &lt;h2&gt;CEO&lt;/h2&gt;
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/jj.jpeg&quot;&gt;&lt;h3&gt;Eng. João Cláudio Mena Kumbundo&lt;/h3&gt;&lt;p&gt;&lt;b&gt;CEO&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/gg.jpeg&quot;&gt;&lt;h3&gt;Eng. Gabriel Costa&lt;/h3&gt;&lt;p&gt;&lt;b&gt;Co-CEO&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;Diretores&lt;/h2&gt;
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/md.jpg&quot;&gt;&lt;h3&gt;Dra. Sofia Martins&lt;/h3&gt;&lt;p&gt;Diretora Médica&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/lamine.jpg&quot;&gt;&lt;h3&gt;Lamine Yamal&lt;/h3&gt;&lt;p&gt;Diretor de Operações&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/marta.jpg&quot;&gt;&lt;h3&gt;Marta De Silva&lt;/h3&gt;&lt;p&gt;Diretora de Projetos&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;Coordenadores&lt;/h2&gt;
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/cs.jpg&quot;&gt;&lt;h3&gt;Carolina Serqueira&lt;/h3&gt;&lt;p&gt;Coordenadora África&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/cr7.jpg&quot;&gt;&lt;h3&gt;Cristiano Ronaldo&lt;/h3&gt;&lt;p&gt;Coordenador Ásia&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/messi.jpg&quot;&gt;&lt;h3&gt;Leonel Messi&lt;/h3&gt;&lt;p&gt;Coordenador Europa&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;Colaboradores&lt;/h2&gt;
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1582750433449-648ed127bb54&quot;&gt;&lt;h3&gt;Dr. Avelino Vitor&lt;/h3&gt;&lt;p&gt;Médico voluntário&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/ney.jpg&quot;&gt;&lt;h3&gt;Neymar Junior&lt;/h3&gt;&lt;p&gt;Psicólogo Humanitário&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/isa.jpg&quot;&gt;&lt;h3&gt;Amitiz Iran&lt;/h3&gt;&lt;p&gt;Enfermeira&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- MISSAO --&gt;
+&lt;section id=&quot;missao&quot; class=&quot;page&quot;&gt;
+  &lt;div class=&quot;split-section&quot;&gt;
+    &lt;div class=&quot;split-text&quot;&gt;
+      &lt;h1&gt;Nossa Missão&lt;/h1&gt;
+      &lt;p&gt;A MediReach tem como missão levar cuidados médicos e psicológicos às populações mais vulneráveis do mundo.&lt;/p&gt;
+      &lt;p&gt;Trabalhamos para garantir acesso a serviços de saúde, prevenção de doenças e apoio humanitário em comunidades isoladas.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;split-image&quot;&gt;&lt;img src=&quot;imagens/missao.jpeg&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;split-section&quot;&gt;
+    &lt;div class=&quot;split-image&quot;&gt;&lt;img src=&quot;imagens/mi.jpg&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;split-text&quot;&gt;
+      &lt;h2&gt;Impacto no Terreno&lt;/h2&gt;
+      &lt;p&gt;A MediReach atua diretamente nas comunidades, garantindo cuidados essenciais em regiões afetadas por crises humanitárias.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- VISAO --&gt;
+&lt;section id=&quot;visao&quot; class=&quot;page&quot;&gt;
+  &lt;div class=&quot;split-section&quot;&gt;
+    &lt;div class=&quot;split-text&quot;&gt;
+      &lt;h1&gt;Nossa Visão&lt;/h1&gt;
+      &lt;p&gt;A MediReach acredita num mundo onde todas as pessoas, independentemente da sua localização, condição social ou económica, tenham acesso a cuidados de saúde de qualidade, dignos e seguros.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;split-image&quot;&gt;&lt;img src=&quot;imagens/visao1.jpeg&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- PROJETOS --&gt;
+&lt;section id=&quot;projetos&quot; class=&quot;page&quot;&gt;
+  &lt;h1&gt;Projetos Contínuos&lt;/h1&gt;
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto4.jpeg&quot;&gt;&lt;p&gt;&lt;b&gt;Clínicas móveis&lt;/b&gt;&lt;br&gt;Atendimento médico regular em regiões remotas.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto6.webp&quot;&gt;&lt;p&gt;&lt;b&gt;Vacinação&lt;/b&gt;&lt;br&gt;Campanhas periódicas para prevenir doenças.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto7.jpeg&quot;&gt;&lt;p&gt;&lt;b&gt;Educação em saúde&lt;/b&gt;&lt;br&gt;Formação em higiene, nutrição e primeiros socorros.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto5.jpeg&quot;&gt;&lt;p&gt;&lt;b&gt;Monitorização de epidemias&lt;/b&gt;&lt;br&gt;Recolha de dados e prevenção de surtos.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto9.webp&quot;&gt;&lt;p&gt;&lt;b&gt;Telemedicina&lt;/b&gt;&lt;br&gt;Consultas médicas à distância.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto8.jpeg&quot;&gt;&lt;p&gt;&lt;b&gt;Saúde materno-infantil&lt;/b&gt;&lt;br&gt;Acompanhamento de grávidas, cuidados pré-natais e pós-natais.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto10.jpeg&quot;&gt;&lt;p&gt;&lt;b&gt;Distribuição de medicamentos&lt;/b&gt;&lt;br&gt;Fornecimento regular de medicamentos básicos.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto11.png&quot;&gt;&lt;p&gt;&lt;b&gt;Saúde mental comunitária&lt;/b&gt;&lt;br&gt;Apoio psicológico para populações afetadas por crises.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;&lt;img src=&quot;imagens/foto12.jpeg&quot;&gt;&lt;p&gt;&lt;b&gt;Formação de agentes comunitários&lt;/b&gt;&lt;br&gt;Treinar membros da comunidade para prestar cuidados básicos.&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- PROGRAMAS --&gt;
+&lt;section id=&quot;programas&quot; class=&quot;page&quot;&gt;
+  &lt;h1&gt;Programas&lt;/h1&gt;
+  &lt;div class=&quot;programas-founded&quot;&gt;
+    &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;white&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+      &lt;rect x=&quot;3&quot; y=&quot;4&quot; width=&quot;18&quot; height=&quot;18&quot; rx=&quot;2&quot; ry=&quot;2&quot;/&gt;
+      &lt;line x1=&quot;16&quot; y1=&quot;2&quot; x2=&quot;16&quot; y2=&quot;6&quot;/&gt;
+      &lt;line x1=&quot;8&quot; y1=&quot;2&quot; x2=&quot;8&quot; y2=&quot;6&quot;/&gt;
+      &lt;line x1=&quot;3&quot; y1=&quot;10&quot; x2=&quot;21&quot; y2=&quot;10&quot;/&gt;
+    &lt;/svg&gt;
+    Fundados a: 20 de abril de 2019
+  &lt;/div&gt;
+  &lt;h2 style=&quot;margin-bottom:24px;&quot;&gt;Marcos Importantes&lt;/h2&gt;
+  &lt;div class=&quot;timeline&quot;&gt;
+    &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-card&quot;&gt;&lt;span class=&quot;timeline-year&quot;&gt;2019 - 2020&lt;/span&gt;&lt;h3&gt;Síria&lt;/h3&gt;&lt;p&gt;Atendimento médico e psicológico a refugiados internos e famílias deslocadas por conflitos armados.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-card&quot;&gt;&lt;span class=&quot;timeline-year&quot;&gt;2020 - 2021&lt;/span&gt;&lt;h3&gt;Iémen&lt;/h3&gt;&lt;p&gt;Distribuição de medicamentos e suprimentos médicos em zonas de guerra e regiões de difícil acesso.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-card&quot;&gt;&lt;span class=&quot;timeline-year&quot;&gt;2021 - 2022&lt;/span&gt;&lt;h3&gt;Sudão do Sul&lt;/h3&gt;&lt;p&gt;Campanhas de vacinação e atendimento médico em campos de deslocados.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-card&quot;&gt;&lt;span class=&quot;timeline-year&quot;&gt;2022 - 2023&lt;/span&gt;&lt;h3&gt;Afeganistão&lt;/h3&gt;&lt;p&gt;Clínicas móveis para comunidades afetadas por conflitos armados e crises humanitárias.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-card&quot;&gt;&lt;span class=&quot;timeline-year&quot;&gt;2022 - 2023&lt;/span&gt;&lt;h3&gt;Ucrânia&lt;/h3&gt;&lt;p&gt;Apoio de emergência a civis e refugiados com atendimento médico e psicológico.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-card&quot;&gt;&lt;span class=&quot;timeline-year&quot;&gt;2024&lt;/span&gt;&lt;h3&gt;Haiti&lt;/h3&gt;&lt;p&gt;Atuação em áreas afetadas por terramotos e instabilidade política, com distribuição de suprimentos e vacinação.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-card&quot;&gt;&lt;span class=&quot;timeline-year&quot;&gt;2025 - 2026&lt;/span&gt;&lt;h3&gt;Global&lt;/h3&gt;&lt;p&gt;Projetos contínuos de prevenção de epidemias, educação em saúde e assistência a regiões afetadas por conflitos ou desastres naturais.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- CONTACTO --&gt;
+&lt;section id=&quot;contacto&quot; class=&quot;page&quot;&gt;
+  &lt;h1&gt;Contacto&lt;/h1&gt;
+  &lt;div class=&quot;contact&quot;&gt;
+    &lt;p&gt;&lt;b&gt;Sede:&lt;/b&gt;&lt;br&gt;Genebra, Suíça&lt;br&gt;Rua Internacional da Saúde n.º 120&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;Telefone:&lt;/b&gt;&lt;br&gt;+351 923 100 000&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;Email:&lt;/b&gt;&lt;br&gt;info@MediReach.org&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;Filiais:&lt;/b&gt;&lt;br&gt;Rennes (França)&lt;br&gt;Génova (Itália)&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- VOLUNTARIADO --&gt;
+&lt;section id=&quot;voluntario&quot; class=&quot;page&quot;&gt;
+  &lt;h1&gt;Voluntariar-se na MediReach&lt;/h1&gt;
+  &lt;div class=&quot;contact&quot;&gt;
+    &lt;p&gt;Junte-se à MediReach e ajude-nos a levar cuidados médicos e apoio humanitário às comunidades mais vulneráveis do mundo.&lt;/p&gt;
+    &lt;form&gt;
+      &lt;label&gt;Nome completo&lt;/label&gt;
+      &lt;input type=&quot;text&quot; placeholder=&quot;O seu nome&quot; required&gt;
+      &lt;label&gt;Email&lt;/label&gt;
+      &lt;input type=&quot;email&quot; placeholder=&quot;O seu e-mail&quot; required&gt;
+      &lt;label&gt;País&lt;/label&gt;
+      &lt;input type=&quot;text&quot; placeholder=&quot;O seu país&quot;&gt;
+      &lt;label&gt;Área de especialidade&lt;/label&gt;
+      &lt;select required&gt;
+        &lt;option value=&quot;&quot;&gt;Selecione&lt;/option&gt;
+        &lt;option&gt;Médico&lt;/option&gt;
+        &lt;option&gt;Enfermeiro&lt;/option&gt;
+        &lt;option&gt;Psicólogo&lt;/option&gt;
+        &lt;option&gt;Logística&lt;/option&gt;
+        &lt;option&gt;Tradutor/a&lt;/option&gt;
+        &lt;option&gt;Outro&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;label&gt;Anos de experiência&lt;/label&gt;
+      &lt;input type=&quot;number&quot; min=&quot;0&quot;&gt;
+      &lt;label&gt;Disponibilidade&lt;/label&gt;
+      &lt;select&gt;
+        &lt;option&gt;1-2 semanas&lt;/option&gt;
+        &lt;option&gt;1 mês&lt;/option&gt;
+        &lt;option&gt;3 meses&lt;/option&gt;
+        &lt;option&gt;6 meses&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;label&gt;Motivação&lt;/label&gt;
+      &lt;textarea rows=&quot;4&quot; placeholder=&quot;Por que razão deseja ser voluntário/a?&quot;&gt;&lt;/textarea&gt;
+      &lt;button type=&quot;submit&quot;&gt;Enviar candidatura&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;© 2019 MediReach (MDR) — Organização Humanitária Internacional&lt;/p&gt;
+&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <a href="index.html">← Voltar atrás</a>
+
+    <script>
+        hljs.highlightAll();
+        function copyCode() {
+            const code = document.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copiado!';
+                setTimeout(() => btn.textContent = 'Copiar', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
